@@ -5,10 +5,12 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-1
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿Las fases del workflow son F0 = esqueleto del repo y F1…F8 = H1…H8 del DDD?
 - Recommendation: Sí: F0 levanta el esqueleto (pyproject sin dependencias, paquete gmod vacío, copia vendorizada de gart, check con python3 -m unittest); F1…F8 son los hitos H1…H8 del DDD, uno a uno
+- Answer: No: F-1 es mejorar, ampliar y cerciorar el DDD; F0 es subir a main todo lo decidido en F-1 y definir su orden en versiones, como el resto de repos
+- Answered: 2026-11-26
 
 ## Q-2
 - Refs: DDD-1
