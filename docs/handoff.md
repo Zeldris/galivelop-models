@@ -11,7 +11,7 @@
 | **Rama** | `ccr-62bb64e8-2njnfm` |
 | **Fase / tarea** | F-1: mejorar, ampliar y cerciorar el DDD (`docs/ddd.md`) a partir del borrador 1. Después, F0: subir a `main` lo decidido en F-1 y ordenarlo en versiones, como el resto de repos |
 | **Último punto estable** | respuestas a Q-1 a Q-18 subidas |
-| **Siguiente paso** | F-1 (refs `DDD-1`): rondas 1 y 2 cerradas (D-1 a D-18). Leer GVE, gvc e Instalador-WMF-Tarkor (D-18) para la tabla de H2 y escribir la versión final de `docs/ddd.md` |
+| **Siguiente paso** | F-1 (refs `DDD-1`): ronda 3 (Q-19 a Q-25, del inventario `docs/records/inventario-consumidores-2026-11-26.md`) presentada; apuntar respuestas y escribir la versión final de `docs/ddd.md` |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`: verde. Deuda: aún no hay código ni tests; en F0 se añade `python3 -m unittest discover` al check |
 
 ## Para la próxima publicación
