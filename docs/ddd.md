@@ -153,4 +153,13 @@ Todos son provisionales (`/0`) hasta H6; en H6 pasan a `/1`.
 
 ## Decisiones
 
-_(vacío: se rellena al resolver las preguntas de §8)_
+Resueltas en la ronda 1 de F-1 (`docs/questions.md`); se integran en el texto al escribir la versión final.
+
+- **D-1 (Q-1):** F-1 mejora, amplía y cerciora este DDD; F0 sube a `main` lo decidido en F-1 y lo ordena en versiones.
+- **D-2 (Q-2):** sin firma criptográfica en v1: el catálogo publicado lleva un manifiesto con sha256 de cada archivo.
+- **D-3 (Q-3):** los datos del catálogo viven en este repo, en `catalog/`.
+- **D-4 (Q-4):** en v1 no se aceptan máquinas ni medidas de terceros.
+- **D-5 (Q-5):** las reglas de memoria se mantienen a mano en H3; desde H6, un informe de desviación frente a GVE con umbral configurable.
+- **D-6 (Q-6):** id de Variante `<model-id>:<formato>-<cuant>` en minúsculas (p. ej. `qwen3-8b-instruct:gguf-q4_k_m`); sigue siendo objeto de valor dentro de Modelo.
+- **D-7 (Q-7):** Encaje con cuatro veredictos: el cuarto, `unknown`, cuando falta un dato; `recommend` nunca lo ofrece y el motivo dice qué dato falta. Se reescribe el invariante 5.
+- **D-8 (Q-8):** datasets fuera; un LoRA es un Modelo con su Tarea y referencia al modelo base; su licencia, por los usos normales. Se quita «marcados como derivatives».

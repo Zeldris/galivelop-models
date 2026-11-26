@@ -28,3 +28,8 @@ mantiene al día (skill `domain-modeling`). El flujo nunca sobrescribe este arch
 ## Términos del proyecto
 
 <!-- **Término**: definición, y dónde vive en el código. -->
+
+- **Variante** (*Variant*): una forma concreta de descargar y ejecutar un Modelo (formato y cuantización). Su id es
+  `<model-id>:<formato>-<cuant>` en minúsculas, p. ej. `qwen3-8b-instruct:gguf-q4_k_m`.
+- **Encaje** (*Fit*): el veredicto de si una Variante cabe en una Máquina: `fits`, `tight`, `no` o `unknown` (falta un
+  dato; el motivo dice cuál). Una recomendación nunca ofrece `unknown`.

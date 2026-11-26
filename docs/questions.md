@@ -14,49 +14,133 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-2
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: §8.1 Firma del catálogo: ¿sin firma criptográfica en la v1?
 - Recommendation: No en la v1: solo manifiesto sha256; se decide cuando el instalador descargue el catálogo por la red
+- Answer: ok
+- Answered: 2026-11-26
 
 ## Q-3
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: §8.2 ¿Los datos del catálogo viven en este repo, en catalog/?
 - Recommendation: En este repo, en catalog/, hasta que su tamaño o su ritmo de cambio lo pidan
+- Answer: ok
+- Answered: 2026-11-26
 
 ## Q-4
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: §8.5 ¿Sin máquinas ni medidas de terceros en la v1?
 - Recommendation: No en la v1; se reconsidera con el GVE Hub
+- Answer: ok
+- Answered: 2026-11-26
 
 ## Q-5
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: §8.3 ¿Reglas de memoria a mano y, desde H6, informe de desviación contra GVE con umbral configurable?
 - Recommendation: A mano en H3; desde H6 un informe que señala dónde lo estimado se aleja de lo medido más que un umbral (clave de configuración)
+- Answer: ok
+- Answered: 2026-11-26
 
 ## Q-6
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿Variant con id estable <model-id>:<format>-<quant>?
 - Recommendation: Cada Variant tiene un id estable <model-id>:<format>-<quant> en minúsculas (p. ej. qwen3-8b-instruct:gguf-q4_k_m); sigue siendo objeto de valor dentro de su Model, pero el id es lo que citan Measurement, la CLI y los consumidores
+- Answer: ok
+- Answered: 2026-11-26
 
 ## Q-7
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿fit distingue unknown (falta un dato) de no (no cabe)?
 - Recommendation: Añadir un cuarto veredicto unknown (falta un dato) distinto de no (no cabe); sigue fallando cerrado: recommend nunca ofrece unknown y el motivo dice qué dato falta
+- Answer: ok
+- Answered: 2026-11-26
 
 ## Q-8
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: §8.4 ¿Datasets fuera y LoRA como Model con modelo base, sin marca especial de derivatives?
 - Recommendation: Datasets fuera (no son modelos). Un LoRA entra como Model con Task y referencia a su modelo base; su licencia se describe con los usos normales y el filtro license_use decide. Se quita lo de «marcados como derivatives»
+- Answer: ok
+- Answered: 2026-11-26
+
+## Q-9
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿El orden de versiones de gmod depende de que gart publique su validador?
+- Recommendation: Los hitos de esquema y validación de gmod esperan a la versión de gart con su validador; sin validador provisional propio. Mientras, H1-H2 avanzan en lo que no depende de gart (modelo de dominio, datos en catalog/)
+
+## Q-10
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: §3 ¿Los esquemas gmod.* viven aquí y gart solo los valida?
+- Recommendation: Se corrige §3: los esquemas gmod.* viven en este repo; gart solo los carga y valida (ADR 0004 de gart)
+
+## Q-11
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿Separar Máquina (hardware) de los ajustes de ejecución de cada app?
+- Recommendation: Máquina describe solo hardware (en gmod); los ajustes de ejecución de cada app (minFreeMemoryMb, timeouts, modelo por rol) quedan en el consumidor, con la máquina por id. Se ajusta el criterio de éxito
+
+## Q-12
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿Una Variante es un conjunto de archivos con rol, cada uno con su sha256?
+- Recommendation: Una Variante es un conjunto de archivos con rol (pesos, texto, vae, tokenizador compartido), cada uno con sha256, bytes y url
+
+## Q-13
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿Licencia sin confirmar = unconfirmed, excluida siempre por license_use?
+- Recommendation: Licencia unconfirmed explícita, sin usos permitidos: el filtro license_use la excluye siempre
+
+## Q-14
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿Orígenes v1: hf, url y ollama?
+- Recommendation: Tipos de origen v1: hf (repo + revisión), url (directa) y ollama (name:tag + digest)
+
+## Q-15
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿Portal sin «firmado» y páginas en src/data/proyectos/?
+- Recommendation: En el portal no se dice «firmado» (D-2); las páginas van en src/data/proyectos/. Se corrigen la nota y H8
+
+## Q-16
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿Lista cerrada de Tareas en v1 y el invariante 8 limitado a ella?
+- Recommendation: Lista cerrada de Tareas en v1 (texto, embeddings, imagen, voz-a-texto, texto-a-voz, visión); añadir una es cambio de esquema. El invariante 8 se limita a esa lista
+
+## Q-17
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿Con qué autor (nombre y correo) firmo los commits?
+- Recommendation: Los commits de este repo salen con el autor que me digas (nombre y correo, p. ej. tu usuario noreply de GitHub); hasta entonces sigo con el actual
+
+## Q-18
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-26
+- Question: ¿Añado GVE, gvc e Instalador-WMF-Tarkor en solo lectura para H2?
+- Recommendation: Para la tabla de diferencias de H2 añado con add_repo GVE, gvc e Instalador-WMF-Tarkor (solo lectura, resumen con un subagente)
