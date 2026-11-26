@@ -11,7 +11,7 @@
 | **Rama** | `ccr-62bb64e8-2njnfm` |
 | **Fase / tarea** | F-1: versión final del DDD (`docs/ddd.md`) a partir del borrador 1 (2026-11-26), antes de F0 |
 | **Último punto estable** | commit de instalación de Galivelop-workflow v0.9.1 |
-| **Siguiente paso** | F-1: revisar el borrador 1 del DDD con la persona (preguntas de §8 incluidas) y escribir la versión final en `docs/ddd.md` |
+| **Siguiente paso** | F-1 (refs `DDD-1`): esperar las respuestas de la ronda 1 (Q-1 a Q-8 en `docs/questions.md`), apuntarlas con `questions.py answer` y preparar la ronda 2; el borrador 1 está en `docs/ddd.md` |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`: verde. Deuda: aún no hay código ni tests; en F0 se añade `python3 -m unittest discover` al check |
 
 ## Para la próxima publicación
