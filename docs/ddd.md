@@ -163,3 +163,13 @@ Resueltas en la ronda 1 de F-1 (`docs/questions.md`); se integran en el texto al
 - **D-6 (Q-6):** id de Variante `<model-id>:<formato>-<cuant>` en minúsculas (p. ej. `qwen3-8b-instruct:gguf-q4_k_m`); sigue siendo objeto de valor dentro de Modelo.
 - **D-7 (Q-7):** Encaje con cuatro veredictos: el cuarto, `unknown`, cuando falta un dato; `recommend` nunca lo ofrece y el motivo dice qué dato falta. Se reescribe el invariante 5.
 - **D-8 (Q-8):** datasets fuera; un LoRA es un Modelo con su Tarea y referencia al modelo base; su licencia, por los usos normales. Se quita «marcados como derivatives».
+- **D-9 (Q-9):** los hitos de esquema y validación esperan al validador publicado de gart, sin validador provisional; mientras, se avanza en lo que no depende de gart.
+- **D-10 (Q-10):** los esquemas `gmod.*` viven en este repo; gart solo los carga y valida. Se corrige §3.
+- **D-11 (Q-11):** Máquina describe solo hardware; los ajustes de ejecución de cada app quedan en el consumidor, que cita la máquina por id. Se ajusta el criterio de éxito.
+- **D-12 (Q-12):** una Variante es un conjunto de archivos con rol (pesos, texto, vae, tokenizador compartido), cada uno con sha256, bytes y url.
+- **D-13 (Q-13):** licencia `unconfirmed` explícita, sin usos permitidos; `license_use` la excluye siempre.
+- **D-14 (Q-14):** orígenes v1: `hf` (repo + revisión), `url` y `ollama` (`name:tag` + digest).
+- **D-15 (Q-15):** el portal no dice «firmado»; las páginas van en `src/data/proyectos/`. Se corrigen la nota y H8.
+- **D-16 (Q-16):** lista cerrada de Tareas en v1 (texto, embeddings, imagen, voz a texto, texto a voz, visión); añadir una es cambio de esquema. El invariante 8 se limita a ella.
+- **D-17 (Q-17):** los commits siguen con el autor actual hasta que la persona diga otro.
+- **D-18 (Q-18):** GVE, gvc e Instalador-WMF-Tarkor se leen en solo lectura para la tabla de diferencias de H2.
