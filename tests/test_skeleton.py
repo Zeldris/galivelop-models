@@ -26,6 +26,27 @@ def imported_roots(path):
     return roots
 
 
+def dynamic_imports(source):
+    """Lines of the calls that import a module at run time, which `imported_roots` cannot see.
+
+    `gmod` imports only with `import` statements, so the stdlib and network checks cover every module it loads.
+    """
+    lines = []
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.Call):
+            func = node.func
+            name = func.id if isinstance(func, ast.Name) else func.attr if isinstance(func, ast.Attribute) else None
+            if name in {"__import__", "import_module"}:
+                lines.append(node.lineno)
+        elif isinstance(node, (ast.Import, ast.ImportFrom)):
+            names = [alias.name for alias in node.names]
+            if isinstance(node, ast.Import) and any(n.split(".")[0] == "importlib" for n in names):
+                lines.append(node.lineno)
+            elif isinstance(node, ast.ImportFrom) and (node.module or "").split(".")[0] == "importlib":
+                lines.append(node.lineno)
+    return lines
+
+
 class SkeletonTest(unittest.TestCase):
     def test_package_imports(self):
         import gmod
@@ -46,6 +67,17 @@ class SkeletonTest(unittest.TestCase):
                 roots = imported_roots(path) - {"gmod"}
                 self.assertEqual(roots - set(sys.stdlib_module_names), set(), "imports outside the stdlib")
                 self.assertEqual(roots & NETWORK_MODULES, set(), "imports a network module")
+                self.assertEqual(dynamic_imports(path.read_text(encoding="utf-8")), [], "imports at run time")
+
+    def test_dynamic_imports_are_caught(self):
+        for source in (
+            'import importlib\nimportlib.import_module("socket")',
+            'from importlib import import_module\nimport_module("socket")',
+            '__import__("socket")',
+        ):
+            with self.subTest(source=source):
+                self.assertTrue(dynamic_imports(source))
+        self.assertEqual(dynamic_imports("import os\nos.getcwd()"), [])
 
 
 if __name__ == "__main__":
