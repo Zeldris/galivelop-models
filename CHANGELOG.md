@@ -7,6 +7,8 @@ la regla y las tareas de cada versión, en el [roadmap](docs/roadmap.md).
 
 ### Added
 
+- `gmod.detect_hardware()` y `Hardware` (mismos campos que una `Machine`): Linux con `/proc`, `sysfs` y
+  `nvidia-smi`; Windows con el registro, `GlobalMemoryStatusEx` y `System32`. Lo que no lee queda `None` (H5).
 - Esqueleto: `pyproject.toml` sin dependencias (Python ≥ 3.10), paquete `gmod` vacío y `tests/test_skeleton.py`
   (solo stdlib y sin red, invariante 12); `python3 -m unittest discover` entra en el check y el CI (S1).
 - Roadmap por versiones `0.0` a `0.4` en `docs/roadmap.md` y este CHANGELOG (D4, F0).
