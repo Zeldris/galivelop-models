@@ -41,7 +41,7 @@ Fase F-1. No lleva código ni se publica.
 | D1 | DDD final, D-1 a D-25 ([DDD](ddd.md), [preguntas](questions.md)) | hecho (2026-11-27) |
 | D2 | Inventario de los consumidores, en solo lectura ([inventario](records/inventario-consumidores-2026-11-26.md)) | hecho (2026-11-26) |
 | D3 | Petición a GVE: variante, máquina y motor en sus informes ([petición](records/peticion-gve-2026-11-27.md)) | hecho (2026-11-27) |
-| D4 | Roadmap por versiones y CHANGELOG (F0, este archivo) | en curso |
+| D4 | Roadmap por versiones y CHANGELOG (F0, este archivo); reparto aprobado (Q-26) | hecho (2026-11-27) |
 
 ## `0.1` «Esqueleto, catálogo y detección»
 
