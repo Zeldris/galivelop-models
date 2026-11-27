@@ -11,7 +11,7 @@
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | Versión `0.1.0` publicada: PR #3 en `main` (`b6fe0e8`) y tag `v0.1.0` sobre ese commit con su release (2026-11-27, confirmado por la persona) |
 | **Último punto estable** | Invariante 12: `tests/test_skeleton.py` ve también los imports dinámicos |
-| **Siguiente paso** | 0.2 espera al validador de `gart` (H1; H3, H4 y H7 van tras H1). Mientras, lo de `records/pending.md` que no dependa de él: buscar un modelo `stt` para la steam-deck (Q-37, invariante 9) y decidir cómo trata H3 la memoria unificada (`vramMiB` null) |
+| **Siguiente paso** | Q-38 y Q-39 (persona): qué Whisper entra como `stt` y la licencia `mit`; con las respuestas, añadir los modelos a `catalog/models/` y `mit` a `licenses.json` (candidatos en `records/stt-candidatos-2026-11-27.md`). 0.2 sigue esperando al validador de `gart` (H1) |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación

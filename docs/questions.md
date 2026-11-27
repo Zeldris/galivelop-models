@@ -336,3 +336,17 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: vision: qwen3.5-* declaran text y vision (capa projector); stt queda sin candidato y el invariante 9 se aplaza para stt
 - Answer: ok
 - Answered: 2026-11-27
+
+## Q-38
+- Refs: H2
+- Status: open
+- Asked: 2026-11-27
+- Question: ¿Qué Whisper entra en el catálogo como stt (docs/records/stt-candidatos-2026-11-27.md)? a) large-v3-turbo q5_0 + small q8_0; b) solo large-v3-turbo q5_0; c) solo small q8_0
+- Recommendation: a: whisper-large-v3-turbo q5_0 (574 MB, más calidad) y whisper-small q8_0 (264 MB, la rápida), los dos con whisper.cpp v1.9.6; así la Deck tiene calidad y una salida si turbo va lenta
+
+## Q-39
+- Refs: H2
+- Status: open
+- Asked: 2026-11-27
+- Question: ¿Se añade la licencia mit a catalog/licenses.json para los pesos de Whisper?
+- Recommendation: Sí: añadir la licencia mit (SPDX MIT, usos commercial, redistribute, derivatives) a catalog/licenses.json
