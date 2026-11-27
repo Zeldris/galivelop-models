@@ -31,6 +31,11 @@ LEGACY_VRAM_CAP_MIB = 4095
 NVIDIA_SMI_QUERY = ["nvidia-smi", "--query-gpu=pci.bus_id,name,memory.total", "--format=csv,noheader,nounits"]
 # Display adapters class in the Windows registry.
 WINDOWS_DISPLAY_CLASS = r"SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}"
+WINDOWS_ENUM_PCI = r"SYSTEM\CurrentControlSet\Enum\PCI"
+WINDOWS_DISPLAY_GUID = "{4d36e968-e325-11ce-bfc1-08002be10318}"
+# Intel discrete GPUs by PCI device id prefix: Arc (DG2) and Battlemage.
+INTEL_DISCRETE_PREFIXES = ("56", "e2")
+LINUX_HIP_LIB_DIRS = ("usr/lib", "usr/lib64", "usr/lib/x86_64-linux-gnu")
 WINDOWS_CPU_KEY = r"HARDWARE\DESCRIPTION\System\CentralProcessor"
 
 Runner = Callable[[Sequence[str]], Optional[str]]
@@ -95,6 +100,7 @@ def detect_hardware(
     system32: Optional[os.PathLike | str] = None,
     env: Optional[Mapping[str, str]] = None,
     total_ram_bytes: Optional[int] = None,
+    present: Optional[Callable[[str], bool]] = None,
 ) -> Hardware:
     """Read the hardware of this computer (Linux or Windows); with no arguments, the real one.
 
@@ -112,7 +118,9 @@ def detect_hardware(
             system32 = Path(env.get("SystemRoot", r"C:\Windows")) / "System32"
         if total_ram_bytes is None:
             total_ram_bytes = _windows_total_ram()
-        return _detect_windows(registry, Path(system32), env, total_ram_bytes, run)
+        if present is None:
+            present = _windows_present
+        return _detect_windows(registry, Path(system32), env, total_ram_bytes, run, present)
     return Hardware(cpu=None, ram_mib=None, gpus=(), compute_apis=(), os=None)
 
 
@@ -132,7 +140,9 @@ def _run_local(command: Sequence[str]) -> Optional[str]:
 
 def _is_integrated(vendor: Optional[str], device_id: Optional[str], vram_mib: Optional[int]) -> bool:
     if vendor == "Intel":
-        return True
+        if device_id and device_id.lower().startswith(INTEL_DISCRETE_PREFIXES):
+            return False
+        return vram_mib is None or vram_mib <= APU_CARVEOUT_MAX_MIB
     if vendor == "AMD":
         if device_id in AMD_APU_DEVICE_IDS:
             return True
@@ -219,12 +229,24 @@ def _linux_gpus(root: Path, smi: dict) -> list:
         name = (_read(card / "device/product_name") or "").strip() or None
         vram_mib = None
         vram_bytes = (_read(card / "device/mem_info_vram_total") or "").strip()
-        if vram_bytes.isdigit():
+        if vram_bytes.isdigit() and int(vram_bytes) > 0:
             vram_mib = int(vram_bytes) // MIB
         if vendor == "NVIDIA":
-            smi_name, vram_mib = smi.get(slot, (None, None))
+            smi_name, smi_vram = smi.get(slot, (None, None))
+            if smi_vram is not None:
+                vram_mib = smi_vram
             name = smi_name or _nvidia_proc_model(root, slot) or name
         gpus.append(_gpu(name or f"{vendor or vendor_id} {device_id}", vendor, device_id, vram_mib))
+    # NVIDIA GPUs the driver lists but sysfs has no DRM card for (no modesetting).
+    proc_gpus = root / "proc/driver/nvidia/gpus"
+    proc_slots = [e.name.lower() for e in proc_gpus.iterdir() if e.is_dir()] if proc_gpus.is_dir() else []
+    for slot in sorted(set(smi) | set(proc_slots)):
+        if slot in seen:
+            continue
+        seen.add(slot)
+        smi_name, smi_vram = smi.get(slot, (None, None))
+        name = smi_name or _nvidia_proc_model(root, slot) or "NVIDIA"
+        gpus.append(_gpu(name, "NVIDIA", None, smi_vram))
     return gpus
 
 
@@ -238,10 +260,19 @@ def _linux_compute_apis(root: Path, gpus: list, smi: dict) -> tuple:
     vendors = {gpu.vendor for gpu in gpus}
     if "NVIDIA" in vendors and (smi or (root / "proc/driver/nvidia/version").exists()):
         apis.add("cuda")
-    if "AMD" in vendors and (root / "dev/kfd").exists() and (root / "opt/rocm").is_dir():
-        apis.add("rocm")
+    if "AMD" in vendors and (root / "dev/kfd").exists():
+        hip_lib = any(
+            (root / d).is_dir() and any((root / d).glob("libamdhip64.so*")) for d in LINUX_HIP_LIB_DIRS
+        )
+        if (root / "opt/rocm").is_dir() or hip_lib:
+            apis.add("rocm")
     icd_dirs = [root / "usr/share/vulkan/icd.d", root / "etc/vulkan/icd.d"]
-    if gpus and any(d.is_dir() and any(d.glob("*.json")) for d in icd_dirs):
+
+    def hardware_icd(path: Path) -> bool:
+        name = path.name.lower()
+        return not (name.startswith("lvp_") or "swiftshader" in name)
+
+    if gpus and any(d.is_dir() and any(hardware_icd(f) for f in d.glob("*.json")) for d in icd_dirs):
         apis.add("vulkan")
     return _ordered(apis)
 
@@ -344,10 +375,41 @@ def _registry_int(value) -> Optional[int]:
     return None
 
 
-def _windows_gpus(registry: Registry, smi: dict) -> list:
+def _windows_present(instance_id: str) -> bool:
+    """True if the device node exists now (a retired adapter keeps its registry entries but has no node)."""
+    import ctypes
+
+    node = ctypes.c_ulong()
+    cfgmgr32 = ctypes.windll.cfgmgr32  # type: ignore[attr-defined]
+    return cfgmgr32.CM_Locate_DevNodeW(ctypes.byref(node), instance_id, 0) == 0
+
+
+def _windows_present_adapters(registry: Registry, present: Callable[[str], bool]) -> dict:
+    """`{Class subkey NNNN: pci slot or None}` of the display adapters whose device node is present."""
+    prefix = (WINDOWS_DISPLAY_GUID + "\\").lower()
+    found = {}
+    for hwid in registry.subkeys(WINDOWS_ENUM_PCI):
+        for instance in registry.subkeys(WINDOWS_ENUM_PCI + "\\" + hwid):
+            values = registry.values(WINDOWS_ENUM_PCI + "\\" + hwid + "\\" + instance)
+            driver = str(values.get("Driver") or "")
+            if not driver.lower().startswith(prefix):
+                continue
+            if not present("PCI\\" + hwid + "\\" + instance):
+                continue
+            location = re.search(
+                r"bus (\d+), device (\d+), function (\d+)", str(values.get("LocationInformation") or ""), re.I
+            )
+            slot = "%04x:%02x:%02x.%x" % (0, *map(int, location.groups())) if location else None
+            found[driver[len(prefix):]] = slot
+    return found
+
+
+def _windows_gpus(registry: Registry, smi: dict, present: Callable[[str], bool]) -> list:
     gpus = []
-    smi_by_name = {name: vram for name, vram in smi.values()}
+    adapters = _windows_present_adapters(registry, present)
     for sub in sorted(name for name in registry.subkeys(WINDOWS_DISPLAY_CLASS) if name.isdigit()):
+        if sub not in adapters:
+            continue
         values = registry.values(WINDOWS_DISPLAY_CLASS + "\\" + sub)
         match = re.search(r"VEN_([0-9A-Fa-f]{4})&DEV_([0-9A-Fa-f]{4})", str(values.get("MatchingDeviceId", "")))
         if not match:  # Basic display adapters, remote and virtual displays: no PCI GPU behind them
@@ -355,22 +417,25 @@ def _windows_gpus(registry: Registry, smi: dict) -> list:
         vendor_id, device_id = match.group(1).lower(), match.group(2).lower()
         vendor = VENDORS.get(vendor_id)
         name = str(values.get("DriverDesc") or "").strip() or None
-        vram_bytes = _registry_int(values.get("HardwareInformation.qwMemorySize"))
+        vram_bytes = _registry_int(values.get("HardwareInformation.qwMemorySize")) or None
         if vram_bytes is None:
             # The 32-bit value saturates just under 4 GiB (0xFFFFFFFF, 0xFFF00000): from 4095 MiB up it is only a
             # lower bound, so unknown (fails closed).
             legacy = _registry_int(values.get("HardwareInformation.MemorySize"))
-            vram_bytes = legacy if legacy is not None and legacy < LEGACY_VRAM_CAP_MIB * MIB else None
+            vram_bytes = legacy if legacy and legacy < LEGACY_VRAM_CAP_MIB * MIB else None
         vram_mib = vram_bytes // MIB if vram_bytes is not None else None
-        if vendor == "NVIDIA" and name in smi_by_name:
-            vram_mib = smi_by_name[name]
+        slot = adapters[sub]
+        if vendor == "NVIDIA" and slot in smi:
+            smi_name, smi_vram = smi[slot]
+            if smi_vram is not None:
+                vram_mib = smi_vram
         gpus.append(_gpu(name or f"{vendor or vendor_id} {device_id}", vendor, device_id, vram_mib))
     return gpus
 
 
-def _detect_windows(registry, system32: Path, env, total_ram_bytes, run: Runner) -> Hardware:
+def _detect_windows(registry, system32: Path, env, total_ram_bytes, run: Runner, present) -> Hardware:
     smi = _nvidia_smi(run) if (system32 / "nvcuda.dll").exists() else {}
-    gpus = _windows_gpus(registry, smi)
+    gpus = _windows_gpus(registry, smi, present)
     vendors = {gpu.vendor for gpu in gpus}
     apis = {"cpu"}
     if "NVIDIA" in vendors and (system32 / "nvcuda.dll").exists():

@@ -10,8 +10,8 @@
 |---|---|
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | 0.1 «Esqueleto, catálogo y detección» ([roadmap](roadmap.md)); S1, H2 y H5 hechos; falta cerrar la fase |
-| **Último punto estable** | H5 hecho: `gmod/hardware.py` (`detect_hardware`, `Hardware`) y `tests/test_hardware.py` (Deck, CUDA, ROCm, solo CPU, Windows), sin revisar todavía |
-| **Siguiente paso** | Revisión de bloque de H5 (diff desde `80d14ab`) y cierre de la fase 0.1: CI de la última subida con `ci-status.py` |
+| **Último punto estable** | H5 hecho: `gmod/hardware.py` (`detect_hardware`, `Hardware`) y `tests/test_hardware.py` (26 tests), con la revisión de bloque hecha (7 hallazgos arreglados) |
+| **Siguiente paso** | Cierre de la fase 0.1: CI de la última subida con `ci-status.py`; luego, 0.2 espera al validador de `gart` (H1) |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
