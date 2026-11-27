@@ -227,3 +227,17 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: Un origen ollama guarda el tag y el digest del manifiesto; la cuantización real se apunta en la variante (no se deja implícita). El tag de Ollama no es el id: qwen3.5:9b pasa a una variante gmod con ese origen
 - Answer: ok
 - Answered: 2026-11-27
+
+## Q-26
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-27
+- Question: ¿Vale el reparto en versiones de docs/roadmap.md?
+- Recommendation: Sí, tal cual: 0.1 esqueleto + catálogo (H2) + detección (H5), que no esperan a gart; 0.2 esquemas/fit/recommend (H1, H3, H4); 0.3 exportación y CLI (H7, H8); 0.4 GVE (H6)
+
+## Q-27
+- Refs: DDD-1
+- Status: open
+- Asked: 2026-11-27
+- Question: ¿Subo a main por PR lo de F-1 y F0 (DDD final, roadmap, CHANGELOG, workflow v0.9.1)?
+- Recommendation: Sí: tras la revisión de código (fase 1) y la retro (fase 2) presentadas, PR a main con reviewed.sh
