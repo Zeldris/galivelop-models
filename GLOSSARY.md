@@ -32,4 +32,9 @@ mantiene al día (skill `domain-modeling`). El flujo nunca sobrescribe este arch
 - **Variante** (*Variant*): una forma concreta de descargar y ejecutar un Modelo (formato y cuantización). Su id es
   `<model-id>:<formato>-<cuant>` en minúsculas, p. ej. `qwen3-8b-instruct:gguf-q4_k_m`.
 - **Encaje** (*Fit*): el veredicto de si una Variante cabe en una Máquina: `fits`, `tight`, `no` o `unknown` (falta un
-  dato; el motivo dice cuál). Una recomendación nunca ofrece `unknown`.
+  dato; el motivo dice cuál). Da la memoria estimada de la variante; la reserva de cada app la pone la app. Una
+  recomendación nunca ofrece `unknown`.
+- **Máquina** (*Machine*): un perfil de hardware (CPU, RAM, GPU/VRAM, API de cómputo, SO), sin ajustes de ninguna app.
+  `steam-deck` es la de referencia. El **hardware detectado** tiene los mismos campos, leídos en ejecución.
+- **Origen** (*Source*): de dónde sale una Variante: `hf` (repo + commit), `url` u `ollama` (tag + digest). El tag de
+  Ollama es un origen, no un id.

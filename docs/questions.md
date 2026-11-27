@@ -167,49 +167,63 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-19
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿H6 depende de que GVE añada variante, máquina y motor a sus informes?
 - Recommendation: Sí: la Medición (H6) depende de que GVE añada a sus informes la variante, la máquina y la versión del motor. Se deja una petición escrita a GVE en docs/records/ (como hizo gvc) y H6 espera a esa versión de GVE
+- Answer: ok
+- Answered: 2026-11-27
 
 ## Q-20
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿Los paquetes de modelos por rol se quedan en los consumidores?
 - Recommendation: Las asignaciones de modelo por rol (perfiles minimo…ultra del instalador, celdas rol × nivel de gvc, models.design de gvoice) se quedan en cada consumidor, como D-11; gmod da modelos, variantes, máquinas y encaje, y el consumidor cita las variantes por id
+- Answer: ok
+- Answered: 2026-11-27
 
 ## Q-21
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿fit acepta hardware detectado en ejecución, no solo máquinas del catálogo?
 - Recommendation: fit acepta tanto una Máquina del catálogo por id como una descripción de hardware detectada en ejecución (mismos campos); el instalador detecta y pregunta sin guardar su máquina
+- Answer: ok
+- Answered: 2026-11-27
 
 ## Q-22
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿fit estima la memoria de la variante y la reserva la pone cada app?
 - Recommendation: fit devuelve la memoria estimada de la variante; la reserva de cada app (sistema, juego, margen) la pone el consumidor. La fórmula del instalador se convierte en regla de su lado, no de gmod
+- Answer: ok
+- Answered: 2026-11-27
 
 ## Q-23
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿Tamaños en bytes y memoria en MiB en todo gmod?
 - Recommendation: Todos los tamaños en bytes y la memoria en MiB enteros; nada de GB/MB/GiB mezclados
+- Answer: ok
+- Answered: 2026-11-27
 
 ## Q-24
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿La revisión de hf se fija siempre a un commit, nunca main?
 - Recommendation: Un origen hf fija la revisión a un commit (sha de 40 caracteres), nunca main; H2 resuelve las urls actuales de gimg y gvoice al commit de hoy
+- Answer: ok
+- Answered: 2026-11-27
 
 ## Q-25
 - Refs: DDD-1
-- Status: open
+- Status: answered
 - Asked: 2026-11-26
 - Question: ¿El tag de Ollama es solo un origen y la cuantización se apunta explícita?
 - Recommendation: Un origen ollama guarda el tag y el digest del manifiesto; la cuantización real se apunta en la variante (no se deja implícita). El tag de Ollama no es el id: qwen3.5:9b pasa a una variante gmod con ese origen
+- Answer: ok
+- Answered: 2026-11-27
