@@ -1,0 +1,37 @@
+{
+  "kind": "gmod.licenses/0",
+  "licenses": [
+    {
+      "id": "apache-2.0",
+      "spdx": "Apache-2.0",
+      "name": "Apache License 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0",
+      "uses": [
+        "commercial",
+        "redistribute",
+        "derivatives"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "llama-3.1-community",
+      "spdx": null,
+      "name": "Llama 3.1 Community License",
+      "url": "https://www.llama.com/llama3_1/license/",
+      "uses": [
+        "commercial",
+        "redistribute",
+        "derivatives"
+      ],
+      "notes": "Atribución «Built with Llama» y licencia aparte por encima de 700 M usuarios activos al mes. Fuente: capa license del manifiesto de Ollama llama3.1:8b, blob sha256:0ba8f0e314b4264dfd19df045cde9d4c394a52474bf92ed6a3de22a4ca31a177."
+    },
+    {
+      "id": "unconfirmed",
+      "spdx": null,
+      "name": "Sin confirmar",
+      "url": null,
+      "uses": [],
+      "notes": "Licencia no confirmada; no apta para recomendar con license_use (D-13)."
+    }
+  ]
+}

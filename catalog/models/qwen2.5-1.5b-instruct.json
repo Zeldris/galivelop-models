@@ -1,0 +1,41 @@
+{
+  "kind": "gmod.model/0",
+  "id": "qwen2.5-1.5b-instruct",
+  "name": "Qwen2.5 1.5B Instruct",
+  "tasks": [
+    "text"
+  ],
+  "provenance": [
+    {
+      "consumer": "instalador",
+      "path": "app/catalogo/catalogo.json",
+      "commit": "56f0108",
+      "key": "modelos[\"qwen2.5:1.5b-instruct\"]"
+    }
+  ],
+  "variants": [
+    {
+      "id": "qwen2.5-1.5b-instruct:gguf-q4_k_m",
+      "format": "gguf",
+      "quantization": "q4_k_m",
+      "license": "apache-2.0",
+      "bytes": 986061405,
+      "runtimes": [
+        {
+          "id": "ollama",
+          "minVersion": "0.34.2"
+        }
+      ],
+      "source": {
+        "type": "ollama",
+        "name": "qwen2.5",
+        "tag": "1.5b-instruct",
+        "digest": "sha256:65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b"
+      },
+      "files": [],
+      "layers": {
+        "model": 986048512
+      }
+    }
+  ]
+}

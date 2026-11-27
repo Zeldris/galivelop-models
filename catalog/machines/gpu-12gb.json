@@ -1,0 +1,26 @@
+{
+  "kind": "gmod.machine/0",
+  "id": "gpu-12gb",
+  "name": "GPU discreta de 12 GiB",
+  "cpu": null,
+  "ramMiB": 16384,
+  "gpus": [
+    {
+      "name": "GPU discreta",
+      "vendor": null,
+      "integrated": false,
+      "vramMiB": 12288
+    }
+  ],
+  "computeApis": [],
+  "os": null,
+  "provenance": [
+    {
+      "consumer": "gvc",
+      "path": "gdev/machine_levels/gpu-12gb.json",
+      "commit": "014f7ff",
+      "key": "description"
+    }
+  ],
+  "notes": "Solo existe en gvc y sin evidencia. Sin dato de CPU, SO ni API de cómputo (fit dará unknown). RAM y VRAM nominales (16 GB y 12 GiB); los umbrales de detección 14336/11776 MiB se quedan en gvc."
+}

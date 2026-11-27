@@ -1,0 +1,72 @@
+{
+  "kind": "gmod.model/0",
+  "id": "flux2-klein-4b",
+  "name": "FLUX.2 klein 4B",
+  "tasks": [
+    "image"
+  ],
+  "provenance": [
+    {
+      "consumer": "gimg",
+      "path": "gimg/models.json",
+      "commit": "bc27219",
+      "key": "models.flux2-klein-4b-q8"
+    }
+  ],
+  "variants": [
+    {
+      "id": "flux2-klein-4b:gguf-q8_0",
+      "format": "gguf",
+      "quantization": "q8_0",
+      "license": "apache-2.0",
+      "bytes": 7047429844,
+      "runtimes": [
+        {
+          "id": "stable-diffusion.cpp",
+          "minVersion": "master-95ff762"
+        }
+      ],
+      "source": {
+        "type": "hf"
+      },
+      "files": [
+        {
+          "role": "weights",
+          "name": "flux-2-klein-4b-Q8_0.gguf",
+          "bytes": 4300629440,
+          "sha256": "0bba6951258ec8f92d51114a8fa13e66828297bfff58a738f52729b3ef66fa28",
+          "hf": {
+            "repo": "leejet/FLUX.2-klein-4B-GGUF",
+            "revision": "3b1f5a9dc3abb32238b053aeb3d823c30afdacbd",
+            "path": "flux-2-klein-4b-Q8_0.gguf"
+          },
+          "url": "https://huggingface.co/leejet/FLUX.2-klein-4B-GGUF/resolve/3b1f5a9dc3abb32238b053aeb3d823c30afdacbd/flux-2-klein-4b-Q8_0.gguf"
+        },
+        {
+          "role": "text",
+          "name": "Qwen3-4B-Q4_K_M.gguf",
+          "bytes": 2497281312,
+          "sha256": "f6f851777709861056efcdad3af01da38b31223a3ba26e61a4f8bf3a2195813a",
+          "hf": {
+            "repo": "unsloth/Qwen3-4B-GGUF",
+            "revision": "22c9fc8a8c7700b76a1789366280a6a5a1ad1120",
+            "path": "Qwen3-4B-Q4_K_M.gguf"
+          },
+          "url": "https://huggingface.co/unsloth/Qwen3-4B-GGUF/resolve/22c9fc8a8c7700b76a1789366280a6a5a1ad1120/Qwen3-4B-Q4_K_M.gguf"
+        },
+        {
+          "role": "vae",
+          "name": "full_encoder_small_decoder.safetensors",
+          "bytes": 249519092,
+          "sha256": "ea4273f02d1fafbf8e1d1c2cf6018ed8748652eb0bf34f2dd91171f16f15ab62",
+          "hf": {
+            "repo": "black-forest-labs/FLUX.2-small-decoder",
+            "revision": "a3efc24f613ef42d9428af62fdbd6f5fd8856c4a",
+            "path": "full_encoder_small_decoder.safetensors"
+          },
+          "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/a3efc24f613ef42d9428af62fdbd6f5fd8856c4a/full_encoder_small_decoder.safetensors"
+        }
+      ]
+    }
+  ]
+}

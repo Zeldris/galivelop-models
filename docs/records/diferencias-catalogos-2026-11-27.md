@@ -194,3 +194,13 @@ Digest = sha256 del manifiesto v2 en bruto. Cuantización = `file_type` del blob
 5. **Borrador:** `qwen3.5:0.8b` trae una capa `draft` (302 867 776 B). Es parte de la variante (cuenta en sus bytes y en su memoria), no un modelo aparte.
 6. **Repo renombrado:** `Comfy-Org/flux2-dev` es hoy `Comfy-Org/Flux-2-Dev`; el catálogo usa el nombre canónico. gimg sigue funcionando por la redirección, pero conviene que use el nuevo al pasar a gmod.
 7. **Licencia en Ollama:** los siete manifiestos traen capa `license`; sirve para resolver P-3 (Llama 3.1) sin buscar fuera.
+
+## 6. Migración a catalog/ (2026-11-27)
+
+H2 paso 2: 13 modelos, 13 variantes y 2 máquinas pasan a `catalog/` (JSON y README, sin código).
+
+1. **Forma usada (provisional, la fija H1):** `gmod.model/0`, `gmod.machine/0`, `gmod.licenses/0`; claves camelCase, bytes enteros, MiB enteros, `provenance` por modelo y máquina.
+2. **Origen `hf` por archivo:** una variante de imagen o de voz junta archivos de varios repos, así que cada archivo lleva su `hf` (repo canónico, commit de 40 hex, ruta) y su `url`. H1 tiene que decidir si el origen vive en la variante o en el archivo.
+3. **`layers` de Ollama:** las variantes de Ollama llevan `files` vacío y `layers` (`model`, `projector`, `draft`); `bytes` suma todas las capas del manifiesto. H1 decide si `layers` entra en el esquema.
+4. **`memoryHints`:** solo en `qwen3.5-9b` (9216 MiB) y `qwen3.5-4b` (5120 MiB), de gvc (`gdev/catalog.json@014f7ff`, `confirmed: true`); H1 y H3 deciden si son dato de variante (P-8).
+5. **`stt` sin variante:** ningún modelo cubre `stt`; el invariante 9 de la `steam-deck` queda incumplido (pendiente, Q-37). El tokenizador de voz se repite en las tres variantes (Q-32), con el mismo sha256.
