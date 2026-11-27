@@ -11,7 +11,7 @@
 | **Rama** | `ccr-99b59083-p3cl8m` (desde `main` tras el PR #3) |
 | **Fase / tarea** | `0.1.0` fusionada en `main` (PR #3). 0.2 (H1, H3, H4, H7) espera al validador de `gart` (D-9), que esta sesión no alcanza; mientras, pendientes leves sin dependencias |
 | **Último punto estable** | Invariante 12: `tests/test_skeleton.py` rechaza también las importaciones en tiempo de ejecución (`importlib`, `__import__`) |
-| **Siguiente paso** | Con el validador de `gart` publicado, H1; hasta entonces, según Q-39 (tag `v0.1.0` ya subido sobre `b6fe0e8`) |
+| **Siguiente paso** | Esperar al validador de `gart` (Q-39: a). Al 2026-11-27, `gart` está en DDD (`8d7489c`, sin tags ni código); su siguiente paso es gart-H1 (`KindId`). Con el validador publicado, H1 aquí. Todo lo demás de 0.2 y 0.3 cuelga de H1 |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación

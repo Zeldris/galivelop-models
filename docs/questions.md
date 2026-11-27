@@ -348,7 +348,9 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-39
 - Refs:
-- Status: open
+- Status: answered
 - Asked: 2026-11-27
 - Question: 0.2 (H1, H3, H4, H7) depende del validador de gart (D-9). ¿Qué hago mientras? (a) esperar; (b) adelantar H3 (memoria unificada de la Deck, sin validador); (c) otra cosa
 - Recommendation: a: esperar al validador de gart; si ya está publicado, dime dónde y empiezo H1
+- Answer: a (la persona delega; el agente elige esperar): gart sigue en DDD (8d7489c, sin tags ni código del validador) y H3 depende de H1 según el DDD, así que (b) no era viable
+- Answered: 2026-11-27
