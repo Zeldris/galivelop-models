@@ -5,8 +5,14 @@ la regla y las tareas de cada versión, en el [roadmap](docs/roadmap.md).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-27
+
 ### Added
 
+- Catálogo inicial en `catalog/`: 13 modelos (`models/<model-id>.json`, una variante cada uno, revisiones `hf` fijadas
+  a commit y digests de Ollama), 2 máquinas (`steam-deck`, `gpu-12gb`) y `licenses.json`, migrados desde el
+  instalador, gimg, gvoice y gvc según `docs/records/diferencias-catalogos-2026-11-27.md`; forma provisional hasta H1
+  y `flux3-image-klein` con licencia `unconfirmed` (H2).
 - `gmod.detect_hardware()` y `Hardware` (mismos campos que una `Machine`): Linux con `/proc`, `sysfs` y
   `nvidia-smi`; Windows con el registro, `GlobalMemoryStatusEx` y `System32`. Lo que no lee queda `None` (H5).
 - Esqueleto: `pyproject.toml` sin dependencias (Python ≥ 3.10), paquete `gmod` vacío y `tests/test_skeleton.py`
