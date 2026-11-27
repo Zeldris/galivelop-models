@@ -336,3 +336,17 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: vision: qwen3.5-* declaran text y vision (capa projector); stt queda sin candidato y el invariante 9 se aplaza para stt
 - Answer: ok
 - Answered: 2026-11-27
+
+## Q-38
+- Refs:
+- Status: open
+- Asked: 2026-11-27
+- Question: ¿Cómo se sube el tag v0.1.0? (a) lo subes tú a mano; (b) conectas tu equipo por Remote Control a esta sesión; (c) en una sesión local
+- Recommendation: c: abrir una sesión de Claude Code en tu equipo con el repo y pedir el tag; aquí no hay equipo conectado
+
+## Q-39
+- Refs:
+- Status: open
+- Asked: 2026-11-27
+- Question: 0.2 (H1, H3, H4, H7) depende del validador de gart (D-9). ¿Qué hago mientras? (a) esperar; (b) adelantar H3 (memoria unificada de la Deck, sin validador); (c) otra cosa
+- Recommendation: a: esperar al validador de gart; si ya está publicado, dime dónde y empiezo H1
