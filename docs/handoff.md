@@ -10,8 +10,8 @@
 |---|---|
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | F-1: mejorar, ampliar y cerciorar el DDD (`docs/ddd.md`) a partir del borrador 1. Después, F0: subir a `main` lo decidido en F-1 y ordenarlo en versiones, como el resto de repos |
-| **Último punto estable** | F0, fase 2: retro y medida de tokens escritas (`docs/records/retro-2026-11-27-f0-subida-a-main.md`), sin decidir |
-| **Siguiente paso** | La persona decide P1 a P4 de la retro; se escribe en su `**Estado:**`, se aplica lo aprobado, fase 3 (`reviewed.sh`) y PR a `main` |
+| **Último punto estable** | F0, fase 2 cerrada: retro aprobada (P1-P4), P3 y P4 aplicadas |
+| **Siguiente paso** | Fase 3: `reviewed.sh`, push y PR a `main` (Q-27); con el CI en verde, la persona fusiona |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`: verde. Deuda: aún no hay código ni tests; en F0 se añade `python3 -m unittest discover` al check |
 
 ## Para la próxima publicación

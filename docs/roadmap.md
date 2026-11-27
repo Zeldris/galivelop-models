@@ -49,7 +49,7 @@ Lo que no depende del validador de `gart`: el esqueleto, los datos del catálogo
 
 | Id | Tarea | Estado |
 |---|---|---|
-| S1 | Esqueleto: `pyproject.toml` sin dependencias, paquete `gmod` vacío, `python3 -m unittest discover` en el check y en el CI | pendiente |
+| S1 | Esqueleto: `pyproject.toml` sin dependencias, paquete `gmod` vacío, `python3 -m unittest discover` en el check y en el CI; en `AGENTS.md`, las reglas del proyecto y el texto de `branchCheck` como lo fija `.claude/gw.json` (leve de la fase 1, retro P4) | pendiente |
 | H2 | Catálogo inicial: tabla de diferencias entre los catálogos del instalador, gimg, gvoice y gvc, con revisiones `hf` fijadas a un commit (D-24); revisión de la persona; migración a `catalog/` (valida al llegar H1) | pendiente |
 | H5 | `detect_hardware` en Linux y Windows, con `/proc` y `sysfs` simulados en los tests; prueba real en la Deck, pendiente de la persona | pendiente |
 

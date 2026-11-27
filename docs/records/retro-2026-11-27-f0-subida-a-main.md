@@ -3,7 +3,8 @@
 Sesión `c8fcc8e5`, rama `ccr-c9ef964f-38192u`: respuestas a Q-26 y Q-27, fase 1 (revisión) y fase 2 (esta retro y
 `gw-opt-tokens`).
 
-**Estado:** pendiente de la persona: P1 a P4 presentados, sin decidir.
+**Estado:** aprobada por la persona (2026-11-27): P3 aplicada en `.claude/gw/gw-opt-tokens.md`; P4 aplicada como
+parte de S1 en `docs/roadmap.md`; P1 y P2 aprobadas para el flujo, en «For Galivelop-workflow».
 
 ## Medida (`gw-opt-tokens`)
 

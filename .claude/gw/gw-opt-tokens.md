@@ -14,6 +14,9 @@ las crea una vez; desde entonces son del proyecto.
 ## Costes conocidos
 
 <!-- Lo que se ha visto que cuesta mucho en este proyecto (archivos grandes leídos enteros, salidas largas...). -->
+- `git diff --stat` de una rama que trae el flujo vendorizado lista cientos de archivos (4.8k tokens con 244): para
+  ver qué trae, `git diff --shortstat` y `python3 .claude/gw/scripts/review-scope.py --workflow <clon>`. (Retro
+  2026-11-27, P3.)
 
 ## Ajustes en vigor
 
