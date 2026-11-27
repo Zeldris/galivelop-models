@@ -339,10 +339,12 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-38
 - Refs:
-- Status: open
+- Status: answered
 - Asked: 2026-11-27
 - Question: ¿Cómo se sube el tag v0.1.0? (a) lo subes tú a mano; (b) conectas tu equipo por Remote Control a esta sesión; (c) en una sesión local
 - Recommendation: c: abrir una sesión de Claude Code en tu equipo con el repo y pedir el tag; aquí no hay equipo conectado
+- Answer: ya estaba subido (v0.1.0 sobre b6fe0e8)
+- Answered: 2026-11-27
 
 ## Q-39
 - Refs:

@@ -11,7 +11,7 @@
 | **Rama** | `ccr-99b59083-p3cl8m` (desde `main` tras el PR #3) |
 | **Fase / tarea** | `0.1.0` fusionada en `main` (PR #3). 0.2 (H1, H3, H4, H7) espera al validador de `gart` (D-9), que esta sesión no alcanza; mientras, pendientes leves sin dependencias |
 | **Último punto estable** | Invariante 12: `tests/test_skeleton.py` rechaza también las importaciones en tiempo de ejecución (`importlib`, `__import__`) |
-| **Siguiente paso** | Tag `v0.1.0` desde el equipo local (pendiente). Luego, con el validador de `gart` publicado, H1; hasta entonces, la persona decide si se avanza otra cosa |
+| **Siguiente paso** | Con el validador de `gart` publicado, H1; hasta entonces, según Q-39 (tag `v0.1.0` ya subido sobre `b6fe0e8`) |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
@@ -20,12 +20,11 @@
 
 ## Hecho (5 últimas)
 
-1. 2026-11-27 — Invariante 12: el test del esqueleto rechaza importaciones dinámicas en `gmod`.
-2. 2026-11-27 — PR #3 fusionado: versión `0.1.0` en `main`.
-3. 2026-11-27 — Commit de versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
-4. 2026-11-27 — PR #2 fusionado: fase 0.1 (S1, H2, H5) en `main`, con retro aprobada (P3 y P4 aplicadas).
-5. 2026-11-27 — H5: `detect_hardware` en Linux (`/proc`, `sysfs`, `nvidia-smi`) y Windows (registro,
-   `System32`), con todas las fuentes simuladas en los tests; prueba real pendiente de la persona.
+1. 2026-11-27 — Tag `v0.1.0` comprobado en el remoto, sobre `b6fe0e8`.
+2. 2026-11-27 — Invariante 12: el test del esqueleto rechaza importaciones dinámicas en `gmod`.
+3. 2026-11-27 — PR #3 fusionado: versión `0.1.0` en `main`.
+4. 2026-11-27 — Commit de versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
+5. 2026-11-27 — PR #2 fusionado: fase 0.1 (S1, H2, H5) en `main`, con retro aprobada (P3 y P4 aplicadas).
 
 ## Pendiente
 
