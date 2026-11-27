@@ -26,6 +26,18 @@
       "notes": "Atribución «Built with Llama» y licencia aparte por encima de 700 M usuarios activos al mes. Fuente: capa license del manifiesto de Ollama llama3.1:8b, blob sha256:0ba8f0e314b4264dfd19df045cde9d4c394a52474bf92ed6a3de22a4ca31a177."
     },
     {
+      "id": "mit",
+      "spdx": "MIT",
+      "name": "MIT License",
+      "url": "https://opensource.org/license/mit",
+      "uses": [
+        "commercial",
+        "redistribute",
+        "derivatives"
+      ],
+      "notes": "Pide conservar el aviso de copyright y la licencia. Fuente: ficha de ggerganov/whisper.cpp en Hugging Face (Q-39)."
+    },
+    {
       "id": "unconfirmed",
       "spdx": null,
       "name": "Sin confirmar",

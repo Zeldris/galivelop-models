@@ -10,8 +10,8 @@
 |---|---|
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | Versión `0.1.0` publicada: PR #3 en `main` (`b6fe0e8`) y tag `v0.1.0` sobre ese commit con su release (2026-11-27, confirmado por la persona) |
-| **Último punto estable** | Invariante 12: `tests/test_skeleton.py` ve también los imports dinámicos |
-| **Siguiente paso** | Q-38 y Q-39 (persona): qué Whisper entra como `stt` y la licencia `mit`; con las respuestas, añadir los modelos a `catalog/models/` y `mit` a `licenses.json` (candidatos en `records/stt-candidatos-2026-11-27.md`). 0.2 sigue esperando al validador de `gart` (H1) |
+| **Último punto estable** | `stt` en el catálogo: `whisper-large-v3-turbo` (q5_0) y `whisper-small` (q8_0) con `whisper.cpp` v1.9.6, licencia `mit` (Q-38, Q-39) |
+| **Siguiente paso** | 0.2 espera al validador de `gart` (H1; H3, H4 y H7 van tras H1). Mientras, de `records/pending.md`: decidir cómo trata H3 la memoria unificada de la steam-deck (`vramMiB` null); lo demás es de la persona |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
@@ -20,13 +20,12 @@
 
 ## Hecho (5 últimas)
 
-1. 2026-11-27 — Tag `v0.1.0` sobre `main` (`b6fe0e8`) y release publicados.
-2. 2026-11-27 — Invariante 12: el test de esqueleto ve `importlib.import_module`, `import_module` y `__import__`;
+1. 2026-11-27 — `stt` para la steam-deck: Whisper large-v3-turbo q5_0 y small q8_0 en `catalog/models/`, licencia `mit` en `licenses.json` (Q-38, Q-39; candidatos en `records/stt-candidatos-2026-11-27.md`).
+2. 2026-11-27 — Tag `v0.1.0` sobre `main` (`b6fe0e8`) y release publicados.
+3. 2026-11-27 — Invariante 12: el test de esqueleto ve `importlib.import_module`, `import_module` y `__import__`;
    uno sin nombre literal hace fallar el test (pendiente leve de la revisión de bloque H2).
-3. 2026-11-27 — PR #3 fusionado (`b6fe0e8`): versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
-4. 2026-11-27 — PR #2 fusionado: fase 0.1 (S1, H2, H5) en `main`, con retro aprobada (P3 y P4 aplicadas).
-5. 2026-11-27 — H5: `detect_hardware` en Linux (`/proc`, `sysfs`, `nvidia-smi`) y Windows (registro,
-   `System32`), con todas las fuentes simuladas en los tests; prueba real pendiente de la persona.
+4. 2026-11-27 — PR #3 fusionado (`b6fe0e8`): versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
+5. 2026-11-27 — PR #2 fusionado: fase 0.1 (S1, H2, H5) en `main`, con retro aprobada (P3 y P4 aplicadas).
 
 ## Pendiente
 
