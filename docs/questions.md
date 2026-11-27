@@ -155,6 +155,7 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: Los commits de este repo salen con el autor que me digas (nombre y correo, p. ej. tu usuario noreply de GitHub); hasta entonces sigo con el actual
 - Answer: ok
 - Answered: 2026-11-26
+- Correction: 2026-11-27, la persona aclara que el autor es su cuenta (la del commit inicial), no el agente
 
 ## Q-18
 - Refs: DDD-1
@@ -244,4 +245,94 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Question: ¿Subo a main por PR lo de F-1 y F0 (DDD final, roadmap, CHANGELOG, workflow v0.9.1)?
 - Recommendation: Sí: tras la revisión de código (fase 1) y la retro (fase 2) presentadas, PR a main con reviewed.sh
 - Answer: Sí, con revisión y PR
+- Answered: 2026-11-27
+
+## Q-28
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Id del modelo flux3-klein-q8 de gimg (P-1 de docs/records/diferencias-catalogos-2026-11-27.md)?
+- Recommendation: flux3-image-klein, el nombre publicado del repo y del archivo
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-29
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Ids de la familia Qwen3.5: con o sin sufijo -instruct (P-2)?
+- Recommendation: qwen3.5-<tamaño> sin sufijo (Ollama no dice instruct/base); llama3.1-8b-instruct y qwen2.5-1.5b-instruct conservan instruct
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-30
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Licencia de llama3.1:8b, que no es SPDX (P-3)?
+- Recommendation: Ficha propia llama-3.1-community leída de la capa license del manifiesto de Ollama; unconfirmed hasta escribirla
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-31
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Licencia de una variante que junta archivos de varios repos hf (P-4)?
+- Recommendation: Licencia de la variante = la más restrictiva de sus archivos; verificar cada repo hf antes de publicar Apache-2.0
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-32
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Cómo se guarda un archivo compartido por dos variantes, Qwen3-4B-Q4_K_M.gguf en gimg (P-5)?
+- Recommendation: Repetir el archivo en cada variante (mismo sha256 y url) y que el consumidor deduplique por sha256
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-33
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Qué roles de archivo usa gmod frente a diffusion/text/vae de gimg y base/design/codec de gvoice (P-6)?
+- Recommendation: Roles de archivo weights, text, vae, tokenizer; el use de gvoice (base, design) se queda en gvoice y codec pasa a tokenizer
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-34
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿RAM de la máquina steam-deck: nominal o la visible (P-7)?
+- Recommendation: 16384 MiB nominal; la reserva la pone cada consumidor sobre fit (D-22)
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-35
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Dónde van los minFreeGiB 9 y 5 de gvc (P-8)?
+- Recommendation: No van a Machine: se guardan como dato de memoria de la variante para H3 (D-5), citando a gvc como fuente
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-36
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Entra gpu-12gb en el catálogo, solo existe en gvc (P-9)?
+- Recommendation: Sí: gpu-12gb con 16384 MiB de RAM y 12288 MiB de VRAM nominales; los umbrales 14336/11776 se quedan en la detección de gvc
+- Answer: ok
+- Answered: 2026-11-27
+
+## Q-37
+- Refs: H2
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Tareas de qwen3.5-* y qué se hace con stt sin candidato (P-10)?
+- Recommendation: vision: qwen3.5-* declaran text y vision (capa projector); stt queda sin candidato y el invariante 9 se aplaza para stt
+- Answer: ok
 - Answered: 2026-11-27

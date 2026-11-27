@@ -9,21 +9,26 @@
 | Campo | Valor |
 |---|---|
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
-| **Fase / tarea** | F-1: mejorar, ampliar y cerciorar el DDD (`docs/ddd.md`) a partir del borrador 1. Después, F0: subir a `main` lo decidido en F-1 y ordenarlo en versiones, como el resto de repos |
-| **Último punto estable** | F0, fase 2 cerrada: retro aprobada (P1-P4), P3 y P4 aplicadas |
-| **Siguiente paso** | Fase 3: `reviewed.sh`, push y PR a `main` (Q-27); con el CI en verde, la persona fusiona |
-| **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`: verde. Deuda: aún no hay código ni tests; en F0 se añade `python3 -m unittest discover` al check |
+| **Fase / tarea** | 0.1 «Esqueleto, catálogo y detección» ([roadmap](roadmap.md)); S1, H2 y H5 hechos; fase cerrada (CI en verde sobre `cb7621c`) |
+| **Último punto estable** | H5 hecho: `gmod/hardware.py` (`detect_hardware`, `Hardware`) y `tests/test_hardware.py` (26 tests), con la revisión de bloque hecha (7 hallazgos arreglados) |
+| **Siguiente paso** | La persona confirmó llevar 0.1 a `main` y fusionar con el CI en verde (2026-11-27): fases 1 y 2 hechas, retro aprobada; `reviewed.sh`, PR, fusión y tag `v0.1.0`. Luego 0.2 espera al validador de `gart` (H1) |
+| **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
 
-instalación del workflow + DDD final (F-1), por PR, tras `/code-review` y `reviewed.sh`
+0.1: S1, H2 y H5 (hechos)
 
 ## Hecho (5 últimas)
 
-1. 2026-11-27 — F0: `docs/roadmap.md` (versiones 0.0 a 0.4) y `CHANGELOG.md`.
-2. 2026-11-27 — F-1 cerrada: DDD final (D-1 a D-25).
-3. 2026-11-26 — Galivelop-workflow v0.9.1 instalado (docs en es, código en en, PR a `main`, sin firmas de agente,
-   prefijo `gmod-`, doble licencia MIT / CC BY-NC-SA 4.0).
+1. 2026-11-27 — H5: `detect_hardware` en Linux (`/proc`, `sysfs`, `nvidia-smi`) y Windows (registro,
+   `System32`), con todas las fuentes simuladas en los tests; prueba real pendiente de la persona.
+2. 2026-11-27 — H2: migración a `catalog/` (modelos, máquinas, licencias) con las respuestas Q-28 a Q-37;
+   `flux3-image-klein` queda `unconfirmed` (VAE con licencia FLUX no comercial).
+3. 2026-11-27 — H2 paso 1: tabla de diferencias (13 modelos, 2 máquinas), revisiones `hf` fijadas y digests de
+   Ollama; preguntas Q-28 a Q-37.
+4. 2026-11-27 — S1: esqueleto (`pyproject.toml`, `gmod/`, `tests/test_skeleton.py`), tests en el check, reglas del
+   proyecto y texto de `branchCheck` en `AGENTS.md`.
+5. 2026-11-27 — PR #1 fusionado: workflow, DDD final, roadmap y CHANGELOG en `main`.
 
 ## Pendiente
 

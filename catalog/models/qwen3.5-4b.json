@@ -1,0 +1,59 @@
+{
+  "kind": "gmod.model/0",
+  "id": "qwen3.5-4b",
+  "name": "Qwen3.5 4B",
+  "tasks": [
+    "text",
+    "vision"
+  ],
+  "provenance": [
+    {
+      "consumer": "instalador",
+      "path": "app/catalogo/catalogo.json",
+      "commit": "56f0108",
+      "key": "modelos[\"qwen3.5:4b\"]"
+    },
+    {
+      "consumer": "gvc",
+      "path": "gdev/catalog.json",
+      "commit": "014f7ff",
+      "key": "cells[1]"
+    }
+  ],
+  "variants": [
+    {
+      "id": "qwen3.5-4b:gguf-q4_k_m",
+      "format": "gguf",
+      "quantization": "q4_k_m",
+      "license": "apache-2.0",
+      "bytes": 3324173757,
+      "runtimes": [
+        {
+          "id": "ollama",
+          "minVersion": "0.34.2"
+        }
+      ],
+      "source": {
+        "type": "ollama",
+        "name": "qwen3.5",
+        "tag": "4b",
+        "digest": "sha256:d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04"
+      },
+      "files": [],
+      "layers": {
+        "model": 2648593216,
+        "projector": 675569120,
+        "other": 11421
+      },
+      "memoryHints": [
+        {
+          "consumer": "gvc",
+          "machine": "steam-deck",
+          "minFreeMiB": 5120,
+          "confirmed": true,
+          "source": "gdev/catalog.json@014f7ff"
+        }
+      ]
+    }
+  ]
+}

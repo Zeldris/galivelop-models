@@ -1,0 +1,42 @@
+{
+  "kind": "gmod.model/0",
+  "id": "nomic-embed-text-v1.5",
+  "name": "Nomic Embed Text v1.5",
+  "tasks": [
+    "embed"
+  ],
+  "provenance": [
+    {
+      "consumer": "instalador",
+      "path": "app/catalogo/catalogo.json",
+      "commit": "56f0108",
+      "key": "modelos[\"nomic-embed-text\"]"
+    }
+  ],
+  "variants": [
+    {
+      "id": "nomic-embed-text-v1.5:gguf-f16",
+      "format": "gguf",
+      "quantization": "f16",
+      "license": "apache-2.0",
+      "bytes": 274302030,
+      "runtimes": [
+        {
+          "id": "ollama",
+          "minVersion": "0.34.2"
+        }
+      ],
+      "source": {
+        "type": "ollama",
+        "name": "nomic-embed-text",
+        "tag": "latest",
+        "digest": "sha256:0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f"
+      },
+      "files": [],
+      "layers": {
+        "model": 274290656,
+        "other": 11374
+      }
+    }
+  ]
+}

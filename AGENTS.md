@@ -11,7 +11,7 @@ en `.claude/skills/` y su configuración en `.claude/gw.json` (solo la lee `.cla
 1. Lee la bitácora, `docs/handoff.md`: rama, tarea en curso, qué falta y siguiente paso.
 2. `git fetch origin <rama>`; `python3 .claude/gw/scripts/recover.py --state` dice en «Remote» si vas al día con
    `origin/<rama>`, y el último commit tiene que coincidir con lo que dice la bitácora.
-3. Comprueba que el check está en verde antes de tocar nada: `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/tests-after-main.py`.
+3. Comprueba que el check está en verde antes de tocar nada: `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`.
 4. Sigue por el **siguiente paso** de la bitácora, salvo que la persona pida otra cosa.
 5. Al empezar cada tarea, trae la rama protegida con `python3 .claude/gw/scripts/merge-main.py` (fetch, commit del
    ledger de métricas, se niega con más cambios sin commit y `git merge origin/main`; merge, nunca
@@ -51,8 +51,8 @@ Cada sesión puede correr en un contenedor temporal: **lo que no está subido no
 
 ## Comprobar
 
-- **El check del proyecto:** `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/tests-after-main.py`. `.githooks/pre-push` lo corre sobre el commit que se sube a
-  `main` o que cambia el entorno; a otra rama, solo los tests relacionados (`branchCheck`). El CI
+- **El check del proyecto:** `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`. `.githooks/pre-push` lo corre sobre el commit que se sube a
+  `main` o que cambia el entorno; a otra rama, lo que fije `branchCheck` (aquí `full`: el check entero). El CI
   (`.github/workflows/check.yml`) lo corre entero en cada pull request y, salvo con `ciOnPush: false`, en cada
   push fuera de `main`.
 - **Antes de subir a `main`, pásalo con `bash .claude/gw/scripts/check.sh`**: corre el check y, si sale
@@ -146,5 +146,11 @@ planea, decide y revisa. Esta línea es la autorización que piden las instrucci
 <!-- Las rellena el proyecto: stack, cómo se arranca, lo que nunca se hace, reglas del dominio, dónde está cada cosa.
      Breve; una regla comprobable se convierte en un script. -->
 
-- Instalar: —.
-- _(por rellenar)_
+- Instalar: —. Python ≥ 3.10, solo stdlib (DDD, invariante 12): `pyproject.toml` no lleva dependencias y `gmod` no
+  importa nada de fuera de la stdlib ni de red; lo comprueba `tests/test_skeleton.py`.
+- **Dónde está cada cosa:** el paquete en `gmod/`, los tests en `tests/` (`python3 -m unittest discover -s tests -t .`,
+  dentro del check), los datos del catálogo en `catalog/` (D-3). La versión vive solo en `pyproject.toml`.
+- Los tests no salen a la red: `/proc`, `sysfs` y los informes se simulan con archivos de prueba.
+- **Autor de los commits (D-17):** la cuenta de la persona, la del commit inicial. Antes del primer commit de cada
+  sesión: `git config user.name "$(git log --format=%an --reverse | head -1)"` y
+  `git config user.email "$(git log --format=%ae --reverse | head -1)"`.

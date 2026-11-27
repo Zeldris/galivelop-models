@@ -1,0 +1,45 @@
+{
+  "kind": "gmod.model/0",
+  "id": "qwen3.5-0.8b",
+  "name": "Qwen3.5 0.8B",
+  "tasks": [
+    "text",
+    "vision"
+  ],
+  "provenance": [
+    {
+      "consumer": "instalador",
+      "path": "app/catalogo/catalogo.json",
+      "commit": "56f0108",
+      "key": "modelos[\"qwen3.5:0.8b\"]"
+    }
+  ],
+  "variants": [
+    {
+      "id": "qwen3.5-0.8b:gguf-q8_0",
+      "format": "gguf",
+      "quantization": "q8_0",
+      "license": "apache-2.0",
+      "bytes": 1322069043,
+      "runtimes": [
+        {
+          "id": "ollama",
+          "minVersion": "0.34.2"
+        }
+      ],
+      "source": {
+        "type": "ollama",
+        "name": "qwen3.5",
+        "tag": "0.8b",
+        "digest": "sha256:de63045f29755d4721c09d54c9b45c2dadb644f4fd7d604d4cac90d96049971c"
+      },
+      "files": [],
+      "layers": {
+        "model": 811843520,
+        "projector": 207346304,
+        "draft": 302867776,
+        "other": 11443
+      }
+    }
+  ]
+}
