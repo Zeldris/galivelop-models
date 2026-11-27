@@ -11,7 +11,7 @@
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | Publicar `v0.1.0`: commit de versión hecho en la rama (`pyproject.toml` 0.1.0, `[0.1.0]` del CHANGELOG con H2, roadmap `hecho (0.1.0, f53a9b2)`) |
 | **Último punto estable** | Commit de versión subido a `ccr-c9ef964f-38192u`, check en verde |
-| **Siguiente paso** | Con la confirmación de la persona: revisión (diff trivial, en sesión), marca con `reviewed.sh`, PR a `main`, fusión con el CI en verde y tag `v0.1.0` sobre `main`. Luego 0.2 espera al validador de `gart` (H1) |
+| **Siguiente paso** | PR de versión a `main` confirmado por la persona (2026-11-27; retro omitida con su confirmación, la de 0.1 ya está aprobada; diff revisado en sesión, sin hallazgos): fusionar con el CI en verde. El tag `v0.1.0` lo sube un agente desde local (en `records/pending.md`). Luego 0.2 espera al validador de `gart` (H1) |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
