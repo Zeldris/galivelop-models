@@ -7,6 +7,8 @@ la regla y las tareas de cada versión, en el [roadmap](docs/roadmap.md).
 
 ### Added
 
+- Esqueleto: `pyproject.toml` sin dependencias (Python ≥ 3.10), paquete `gmod` vacío y `tests/test_skeleton.py`
+  (solo stdlib y sin red, invariante 12); `python3 -m unittest discover` entra en el check y el CI (S1).
 - Roadmap por versiones `0.0` a `0.4` en `docs/roadmap.md` y este CHANGELOG (D4, F0).
 - DDD final en `docs/ddd.md`, decisiones D-1 a D-25 (D1, F-1).
 - Inventario de los consumidores en `docs/records/inventario-consumidores-2026-11-26.md` (D2).
