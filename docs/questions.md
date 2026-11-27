@@ -354,3 +354,10 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: Sí: añadir la licencia mit (SPDX MIT, usos commercial, redistribute, derivatives) a catalog/licenses.json
 - Answer: ok
 - Answered: 2026-11-27
+
+## Q-40
+- Refs: H3
+- Status: open
+- Asked: 2026-11-27
+- Question: ¿Cómo trata `fit` (H3) una GPU integrada con memoria unificada y `vramMiB: null`, como la steam-deck? a) Regla implícita: GPU `integrated: true` + `vramMiB: null` ⇒ la memoria es `ramMiB`; b) campo explícito de memoria compartida en el esquema de `Machine` (H1) y `fit` usa `ramMiB` solo con él; c) la Deck solo encaja por `cpu` contra `ramMiB` y la GPU queda `unknown`
+- Recommendation: b) Campo explícito en el esquema (H1): la GPU declara memoria compartida (p. ej. `sharedMemory: true`); con él, `fit` usa `ramMiB` como bolsa común de CPU y GPU, y `vramMiB: null` sin ese campo sigue dando `unknown` (invariante 6 intacta). La reserva del sistema y del juego la sigue poniendo el consumidor (D-22). Así la invariante 9 se cumple con datos, no con un caso especial de `steam-deck`

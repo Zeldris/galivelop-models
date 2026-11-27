@@ -11,7 +11,7 @@
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | Versión `0.1.0` publicada: PR #3 en `main` (`b6fe0e8`) y tag `v0.1.0` sobre ese commit con su release (2026-11-27, confirmado por la persona) |
 | **Último punto estable** | `stt` en el catálogo: `whisper-large-v3-turbo` (q5_0) y `whisper-small` (q8_0) con `whisper.cpp` v1.9.6, licencia `mit` (Q-38, Q-39) |
-| **Siguiente paso** | 0.2 espera al validador de `gart` (H1; H3, H4 y H7 van tras H1). Mientras, de `records/pending.md`: decidir cómo trata H3 la memoria unificada de la steam-deck (`vramMiB` null); lo demás es de la persona |
+| **Siguiente paso** | Respuesta de la persona a Q-40 (memoria unificada de la steam-deck en `fit`, H3; recomendación b: campo explícito en el esquema de H1). 0.2 sigue esperando al validador de `gart` (H1); lo demás de `records/pending.md` es de la persona |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
