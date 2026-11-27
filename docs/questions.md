@@ -155,6 +155,7 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: Los commits de este repo salen con el autor que me digas (nombre y correo, p. ej. tu usuario noreply de GitHub); hasta entonces sigo con el actual
 - Answer: ok
 - Answered: 2026-11-26
+- Correction: 2026-11-27, la persona aclara que el autor es su cuenta (la del commit inicial), no el agente
 
 ## Q-18
 - Refs: DDD-1

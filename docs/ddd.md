@@ -218,7 +218,7 @@ Resueltas en F-1 (`docs/questions.md`, rondas 1 a 3) e integradas en el texto de
 - **D-14 (Q-14):** orígenes v1: `hf` (repo + revisión), `url` y `ollama` (`name:tag` + digest).
 - **D-15 (Q-15):** el portal no dice «firmado»; las páginas van en `src/data/proyectos/`.
 - **D-16 (Q-16):** lista cerrada de Tareas en v1 (texto, embeddings, imagen, voz a texto, texto a voz, visión); añadir una es cambio de esquema. El invariante de `steam-deck` se limita a ella.
-- **D-17 (Q-17):** los commits siguen con el autor actual hasta que la persona diga otro.
+- **D-17 (Q-17):** los commits salen con la cuenta de la persona, la del commit inicial (`git log --format='%an <%ae>' --reverse | head -1`), nunca con `noreply@anthropic.com`. Corregido el 2026-11-27: la respuesta «ok» se había leído como «seguir con el autor actual».
 - **D-18 (Q-18):** GVE, gvc, el instalador, gimg y gvoice se leen en solo lectura para la tabla de diferencias de H2 (inventario en `docs/records/`).
 - **D-19 (Q-19):** H6 depende de que GVE añada a sus informes la variante, la máquina y la versión del motor; se le deja una petición escrita en `docs/records/`.
 - **D-20 (Q-20):** las asignaciones de modelo por rol se quedan en cada consumidor; gmod da modelos, variantes, máquinas y encaje.

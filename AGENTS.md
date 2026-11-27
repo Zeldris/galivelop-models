@@ -147,4 +147,7 @@ planea, decide y revisa. Esta línea es la autorización que piden las instrucci
      Breve; una regla comprobable se convierte en un script. -->
 
 - Instalar: —.
+- **Autor de los commits (D-17):** la cuenta de la persona, la del commit inicial. Antes del primer commit de cada
+  sesión: `git config user.name "$(git log --format=%an --reverse | head -1)"` y
+  `git config user.email "$(git log --format=%ae --reverse | head -1)"`.
 - _(por rellenar)_
