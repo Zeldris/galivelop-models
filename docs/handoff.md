@@ -10,8 +10,8 @@
 |---|---|
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | F-1: mejorar, ampliar y cerciorar el DDD (`docs/ddd.md`) a partir del borrador 1. Después, F0: subir a `main` lo decidido en F-1 y ordenarlo en versiones, como el resto de repos |
-| **Último punto estable** | F0: Q-26 (reparto en versiones, sí tal cual) y Q-27 (subir a `main` por PR, sí) respondidas |
-| **Siguiente paso** | Fase 1 (revisión del bloque, el `commit-msg` avisa de 25998 líneas, casi todo el flujo vendorizado), fase 2 (`gw-opt-tokens` + `retro`, presentadas), fase 3 (`reviewed.sh`) y PR |
+| **Último punto estable** | F0, fase 1 hecha: revisión del bloque, veredicto SHIP, 0 arreglos, 1 leve en pendientes |
+| **Siguiente paso** | Fase 2: `gw-opt-tokens` y `retro`, presentadas a la persona; luego fase 3 (`reviewed.sh`) y PR a `main` |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`: verde. Deuda: aún no hay código ni tests; en F0 se añade `python3 -m unittest discover` al check |
 
 ## Para la próxima publicación
