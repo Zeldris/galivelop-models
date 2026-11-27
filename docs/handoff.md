@@ -9,9 +9,9 @@
 | Campo | Valor |
 |---|---|
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
-| **Fase / tarea** | Publicar `v0.1.0`: commit de versión hecho en la rama (`pyproject.toml` 0.1.0, `[0.1.0]` del CHANGELOG con H2, roadmap `hecho (0.1.0, f53a9b2)`) |
-| **Último punto estable** | Commit de versión subido a `ccr-c9ef964f-38192u`, check en verde |
-| **Siguiente paso** | PR de versión a `main` confirmado por la persona (2026-11-27; retro omitida con su confirmación, la de 0.1 ya está aprobada; diff revisado en sesión, sin hallazgos): fusionar con el CI en verde. El tag `v0.1.0` lo sube un agente desde local (en `records/pending.md`). Luego 0.2 espera al validador de `gart` (H1) |
+| **Fase / tarea** | Versión `0.1.0` fusionada en `main` (PR #3, `b6fe0e8`, 2026-11-27, confirmada por la persona; retro omitida con su confirmación) |
+| **Último punto estable** | PR #3 fusionado con el CI en verde y la marca de revisión de `4fcd4db` |
+| **Siguiente paso** | Tag `v0.1.0` sobre `main` (`b6fe0e8`): lo sube un agente desde local (en `records/pending.md`). Luego 0.2 espera al validador de `gart` (H1); mientras, lo de `records/pending.md` que no dependa de él |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
@@ -20,7 +20,7 @@
 
 ## Hecho (5 últimas)
 
-1. 2026-11-27 — Commit de versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
+1. 2026-11-27 — PR #3 fusionado (`b6fe0e8`): versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
 2. 2026-11-27 — PR #2 fusionado: fase 0.1 (S1, H2, H5) en `main`, con retro aprobada (P3 y P4 aplicadas).
 3. 2026-11-27 — H5: `detect_hardware` en Linux (`/proc`, `sysfs`, `nvidia-smi`) y Windows (registro,
    `System32`), con todas las fuentes simuladas en los tests; prueba real pendiente de la persona.
