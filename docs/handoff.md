@@ -21,9 +21,9 @@
 ## Hecho (5 últimas)
 
 1. 2026-11-27 — PR #1 fusionado: workflow, DDD final, roadmap y CHANGELOG en `main`.
-1. 2026-11-27 — F0: `docs/roadmap.md` (versiones 0.0 a 0.4) y `CHANGELOG.md`.
-2. 2026-11-27 — F-1 cerrada: DDD final (D-1 a D-25).
-3. 2026-11-26 — Galivelop-workflow v0.9.1 instalado (docs en es, código en en, PR a `main`, sin firmas de agente,
+2. 2026-11-27 — F0: `docs/roadmap.md` (versiones 0.0 a 0.4) y `CHANGELOG.md`.
+3. 2026-11-27 — F-1 cerrada: DDD final (D-1 a D-25).
+4. 2026-11-26 — Galivelop-workflow v0.9.1 instalado (docs en es, código en en, PR a `main`, sin firmas de agente,
    prefijo `gmod-`, doble licencia MIT / CC BY-NC-SA 4.0).
 
 ## Pendiente
