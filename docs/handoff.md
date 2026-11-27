@@ -9,9 +9,9 @@
 | Campo | Valor |
 |---|---|
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
-| **Fase / tarea** | 0.1 «Esqueleto, catálogo y detección» ([roadmap](roadmap.md)) |
-| **Último punto estable** | S1 hecho: esqueleto `pyproject.toml` + `gmod/` + `tests/`, con los tests en el check |
-| **Siguiente paso** | H2: tabla de diferencias entre los catálogos del instalador, gimg, gvoice y gvc (lectura de otros repos con subagente), para revisión de la persona |
+| **Fase / tarea** | 0.1 «Esqueleto, catálogo y detección» ([roadmap](roadmap.md)); H2 en curso |
+| **Último punto estable** | H2, paso 1: tabla de diferencias en [`docs/records/diferencias-catalogos-2026-11-27.md`](records/diferencias-catalogos-2026-11-27.md), con las 13 urls `hf` fijadas a commit (sha256 comprobados) y los 7 tags de Ollama con digest, bytes y cuantización real |
+| **Siguiente paso** | H2, paso 2: la persona revisa la tabla y contesta Q-28 a Q-37; después, migración a `catalog/` con esas respuestas. Red: entorno personal `galivelop-models` (permite `huggingface.co` y `registry.ollama.ai`); clones de solo lectura en `/home/user/zeldris/` y `/home/user/galivelop-developer` (se rehacen con `git clone --depth 1`) |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
@@ -20,13 +20,13 @@
 
 ## Hecho (5 últimas)
 
-1. 2026-11-27 — S1: esqueleto (`pyproject.toml`, `gmod/`, `tests/test_skeleton.py`), tests en el check, reglas del
+1. 2026-11-27 — H2 paso 1: tabla de diferencias (13 modelos, 2 máquinas), revisiones `hf` fijadas y digests de
+   Ollama; preguntas Q-28 a Q-37.
+2. 2026-11-27 — S1: esqueleto (`pyproject.toml`, `gmod/`, `tests/test_skeleton.py`), tests en el check, reglas del
    proyecto y texto de `branchCheck` en `AGENTS.md`.
-2. 2026-11-27 — PR #1 fusionado: workflow, DDD final, roadmap y CHANGELOG en `main`.
-3. 2026-11-27 — F0: `docs/roadmap.md` (versiones 0.0 a 0.4) y `CHANGELOG.md`.
-4. 2026-11-27 — F-1 cerrada: DDD final (D-1 a D-25).
-5. 2026-11-26 — Galivelop-workflow v0.9.1 instalado (docs en es, código en en, PR a `main`, sin firmas de agente,
-   prefijo `gmod-`, doble licencia MIT / CC BY-NC-SA 4.0).
+3. 2026-11-27 — PR #1 fusionado: workflow, DDD final, roadmap y CHANGELOG en `main`.
+4. 2026-11-27 — F0: `docs/roadmap.md` (versiones 0.0 a 0.4) y `CHANGELOG.md`.
+5. 2026-11-27 — F-1 cerrada: DDD final (D-1 a D-25).
 
 ## Pendiente
 
