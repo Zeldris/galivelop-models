@@ -94,7 +94,7 @@ No pasan a `Machine`; se quedan en el consumidor, que cita la máquina por id (D
 
 Por variante (invariantes de `docs/ddd.md` sección 5):
 
-- **H-1 Licencia ausente o sin SPDX:** gvoice (tres variantes, ninguna licencia); gimg `flux3-klein-q8` (`unconfirmed`); instalador `llama3.1:8b` (`Llama-3.1-Community`, sin SPDX ni usos). Los demás tienen SPDX pero sin comprobar contra el repo de origen (una licencia por variante, no por archivo).
+- **H-1 (cerrado en 5.4) Licencia ausente o sin SPDX:** gvoice (tres variantes, ninguna licencia); gimg `flux3-klein-q8` (`unconfirmed`); instalador `llama3.1:8b` (`Llama-3.1-Community`, sin SPDX ni usos). Los demás tienen SPDX pero sin comprobar contra el repo de origen (una licencia por variante, no por archivo).
 - **H-2 (cerrado en 5.2)** Origen `ollama` sin digest del manifiesto (invariante 1): los siete tags del instalador (`llama3.1:8b`, `qwen2.5:1.5b-instruct`, `qwen3.5:0.8b`, `qwen3.5:2b`, `qwen3.5:4b`, `qwen3.5:9b`, `nomic-embed-text`). GVE sí los registra para sus evidencias (inventario), pero no está en este alcance.
 - **H-3 (cerrado en 5.1 y 5.2)** Tamaño total en bytes: instalador, solo GB decimales redondeados a 0,1 GB (error hasta ±50 000 000 B); gimg, solo MB redondeados (error hasta ±500 000 B por archivo). Falta bytes exactos de los siete tags de Ollama (el tamaño real de capas está en el manifiesto de Ollama, sin red no se lee) y de los 8 archivos de gimg. Sospechas por duplicidad: `qwen3.5:0.8b` = 1,0 GB igual que `qwen2.5:1.5b-instruct`; `Qwen3-4B` y `Qwen3VL-4B` ambos 2497 MB.
 - **H-4 (cerrado en 5.2)** Cuantización real tras cada tag de Ollama (D-25): los siete. Sin dato; solo (I) para `llama3.1:8b` y `qwen2.5:1.5b-instruct` (Q4_K_M).
@@ -195,12 +195,36 @@ Digest = sha256 del manifiesto v2 en bruto. Cuantización = `file_type` del blob
 6. **Repo renombrado:** `Comfy-Org/flux2-dev` es hoy `Comfy-Org/Flux-2-Dev`; el catálogo usa el nombre canónico. gimg sigue funcionando por la redirección, pero conviene que use el nuevo al pasar a gmod.
 7. **Licencia en Ollama:** los siete manifiestos traen capa `license`; sirve para resolver P-3 (Llama 3.1) sin buscar fuera.
 
+### 5.4 Licencias comprobadas (Q-31)
+
+Comprobado el 2026-11-27 con `cardData.license` de la API de Hugging Face (`https://huggingface.co/api/models/<repo>`).
+
+| Repo | Licencia |
+|---|---|
+| `leejet/FLUX.2-klein-4B-GGUF` | apache-2.0 |
+| `unsloth/Qwen3-4B-GGUF` | apache-2.0 |
+| `black-forest-labs/FLUX.2-small-decoder` | apache-2.0 |
+| `Qwen/Qwen3-VL-4B-Instruct-GGUF` | apache-2.0 |
+| `leejet/Z-Image-Turbo-GGUF` | apache-2.0 |
+| `Comfy-Org/Z-Image-Turbo` | apache-2.0 |
+| `Serveurperso/Qwen3-TTS-GGUF` | apache-2.0 |
+| `black-forest-labs/FLUX.2-klein-4B` | apache-2.0 |
+| `Tongyi-MAI/Z-Image-Turbo` | apache-2.0 |
+| `Qwen/Qwen3-4B` | apache-2.0 |
+| `Qwen/Qwen3-TTS-12Hz-1.7B-Base` | apache-2.0 |
+| `nomic-ai/nomic-embed-text-v1.5` | apache-2.0 |
+| `Comfy-Org/Flux-2-Dev` | other (flux-1-dev-non-commercial-license) |
+| `leejet/flux-3-image-klein-GGUF` | no declara ninguna |
+| `black-forest-labs/flux-3-image-klein` | other (flux-kommunity-license) |
+
+Conclusión: flux2-klein-4b, z-image-turbo y las tres de voz quedan `apache-2.0`; flux3-image-klein queda `unconfirmed`.
+
 ## 6. Migración a catalog/ (2026-11-27)
 
 H2 paso 2: 13 modelos, 13 variantes y 2 máquinas pasan a `catalog/` (JSON y README, sin código).
 
 1. **Forma usada (provisional, la fija H1):** `gmod.model/0`, `gmod.machine/0`, `gmod.licenses/0`; claves camelCase, bytes enteros, MiB enteros, `provenance` por modelo y máquina.
 2. **Origen `hf` por archivo:** una variante de imagen o de voz junta archivos de varios repos, así que cada archivo lleva su `hf` (repo canónico, commit de 40 hex, ruta) y su `url`. H1 tiene que decidir si el origen vive en la variante o en el archivo.
-3. **`layers` de Ollama:** las variantes de Ollama llevan `files` vacío y `layers` (`model`, `projector`, `draft`); `bytes` suma todas las capas del manifiesto. H1 decide si `layers` entra en el esquema.
+3. **`layers` de Ollama:** las variantes de Ollama llevan `files` vacío y `layers` (`model`, `projector`, `draft`, más `other` = `bytes` menos la suma de las demás capas, así que la suma de `layers` es igual a `bytes`). H1 decide si `layers` entra en el esquema.
 4. **`memoryHints`:** solo en `qwen3.5-9b` (9216 MiB) y `qwen3.5-4b` (5120 MiB), de gvc (`gdev/catalog.json@014f7ff`, `confirmed: true`); H1 y H3 deciden si son dato de variante (P-8).
 5. **`stt` sin variante:** ningún modelo cubre `stt`; el invariante 9 de la `steam-deck` queda incumplido (pendiente, Q-37). El tokenizador de voz se repite en las tres variantes (Q-32), con el mismo sha256.

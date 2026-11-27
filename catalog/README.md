@@ -10,7 +10,7 @@ Datos del catálogo, migrados en H2 desde los cuatro consumidores. Solo JSON; el
 
 ## Forma provisional
 
-La forma (claves en inglés, camelCase, bytes enteros, memoria en MiB, listas ordenadas por id) es **provisional hasta H1**, que la fija. Las variantes de Ollama llevan `layers` y digest del manifiesto; las de Hugging Face, un origen por archivo, fijado a commit de 40 hex.
+La forma (claves en inglés, camelCase, bytes enteros, memoria en MiB, listas ordenadas por id) es **provisional hasta H1**, que la fija. Las variantes de Ollama llevan `layers` (su suma es igual a `bytes`; `other` recoge lo que no es modelo, proyector ni borrador) y digest del manifiesto; las de Hugging Face, un origen por archivo, fijado a commit de 40 hex.
 
 ## De dónde sale cada dato
 

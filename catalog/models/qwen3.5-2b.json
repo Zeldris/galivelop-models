@@ -36,7 +36,8 @@
       "files": [],
       "layers": {
         "model": 2012012448,
-        "projector": 671372768
+        "projector": 671372768,
+        "other": 11421
       }
     }
   ]

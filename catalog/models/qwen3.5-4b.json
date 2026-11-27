@@ -42,7 +42,8 @@
       "files": [],
       "layers": {
         "model": 2648593216,
-        "projector": 675569120
+        "projector": 675569120,
+        "other": 11421
       },
       "memoryHints": [
         {

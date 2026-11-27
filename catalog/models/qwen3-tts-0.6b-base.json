@@ -25,6 +25,7 @@
       "format": "gguf",
       "quantization": "q8_0",
       "license": "apache-2.0",
+      "licenseNotes": "apache-2.0 en todos sus repos hf (Serveurperso/Qwen3-TTS-GGUF), comprobado con la API de Hugging Face el 2026-11-27; ver docs/records/diferencias-catalogos-2026-11-27.md 5.4",
       "bytes": 1283766112,
       "runtimes": [
         {

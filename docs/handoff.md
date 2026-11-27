@@ -10,7 +10,7 @@
 |---|---|
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | 0.1 «Esqueleto, catálogo y detección» ([roadmap](roadmap.md)); H2 hecho, sigue H5 |
-| **Último punto estable** | H2 hecho: `catalog/` con 13 modelos, 13 variantes, 2 máquinas y 3 licencias (forma provisional hasta H1; tabla de diferencias revisada, Q-28 a Q-37) |
+| **Último punto estable** | H2 hecho y revisado (revisión de bloque S1+H2, 3 hallazgos arreglados): `catalog/` con 13 modelos, 13 variantes, 2 máquinas y 3 licencias, forma provisional hasta H1 |
 | **Siguiente paso** | H5: `detect_hardware` en Linux y Windows con `/proc` y `sysfs` simulados en los tests (el catálogo valida al llegar H1, que espera a `gart`) |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 

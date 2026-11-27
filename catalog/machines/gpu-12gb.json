@@ -22,5 +22,5 @@
       "key": "description"
     }
   ],
-  "notes": "Solo existe en gvc y sin evidencia. Sin dato de CPU, SO ni API de cómputo (fit dará unknown). RAM y VRAM nominales (16 GB y 12 GiB); los umbrales de detección 14336/11776 MiB se quedan en gvc."
+  "notes": "Solo existe en gvc y sin evidencia. Sin dato de CPU, SO ni API de cómputo (fit dará unknown). RAM y VRAM nominales (16 GiB y 12 GiB); los umbrales de detección 14336/11776 MiB se quedan en gvc."
 }
