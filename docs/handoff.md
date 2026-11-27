@@ -11,7 +11,7 @@
 | **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
 | **Fase / tarea** | 0.1 «Esqueleto, catálogo y detección» ([roadmap](roadmap.md)); S1, H2 y H5 hechos; fase cerrada (CI en verde sobre `cb7621c`) |
 | **Último punto estable** | H5 hecho: `gmod/hardware.py` (`detect_hardware`, `Hardware`) y `tests/test_hardware.py` (26 tests), con la revisión de bloque hecha (7 hallazgos arreglados) |
-| **Siguiente paso** | 0.2 y 0.3 esperan al validador de `gart` (H1). Con confirmación de la persona: llevar 0.1 a `main` (tres fases: revisión, `gw-opt-tokens` + retro, `reviewed.sh`) y publicar `v0.1.0` |
+| **Siguiente paso** | La persona confirmó llevar 0.1 a `main` y fusionar con el CI en verde (2026-11-27): fases 1 y 2 hechas, retro aprobada; `reviewed.sh`, PR, fusión y tag `v0.1.0`. Luego 0.2 espera al validador de `gart` (H1) |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
