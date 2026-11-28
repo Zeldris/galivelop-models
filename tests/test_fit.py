@@ -138,6 +138,13 @@ class PoolTest(unittest.TestCase):
         got = fit(variant(1000), machine([gpu(None, shared=True, integrated=True)], ram=4000), rules_doc())
         self.assertEqual(got.pool, "shared")
 
+    def test_integrated_plus_discrete_tries_both(self):
+        laptop = [gpu(None, shared=True, integrated=True), gpu(8000)]
+        got = fit(variant(6000), machine(laptop, ram=4000, apis=("cuda", "vulkan")), rules_doc())
+        self.assertEqual((got.verdict, got.pool, got.available_mib), ("fits", "gpu", 8000))
+        got = fit(variant(6000), machine(laptop, ram=32000, apis=("cuda", "vulkan")), rules_doc(rule(marginMiB=5000)))
+        self.assertEqual((got.verdict, got.pool, got.available_mib), ("fits", "shared", 32000))
+
     def test_largest_gpu_alone(self):
         got = fit(variant(1000), machine([gpu(600), gpu(1200)], ram=1, apis=("cuda",)), rules_doc())
         self.assertEqual((got.pool, got.available_mib), ("gpu", 1200))  # no split across GPUs

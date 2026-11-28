@@ -53,14 +53,16 @@ def _pools(machine: dict, rule: dict) -> tuple[list[tuple[str, int]], Optional[t
     missing: Optional[tuple[str, dict]] = None
     gpus = machine.get("gpus") or []
     if apis & allowed & set(GPU_APIS) and gpus:
+        # Integrated + discrete (a laptop): both pools are tried and the best verdict wins.
         shared = [g for g in gpus if g.get("sharedMemory")]
+        dedicated = [g for g in gpus if not g.get("sharedMemory")]
         if shared:
             if machine.get("ramMiB") is None:
                 missing = missing or ("fit.missing", {"field": "ramMiB"})
             else:
                 pools.append(("shared", machine["ramMiB"]))
-        else:
-            best = max(gpus, key=lambda g: -1 if g.get("vramMiB") is None else g["vramMiB"])
+        if dedicated:
+            best = max(dedicated, key=lambda g: -1 if g.get("vramMiB") is None else g["vramMiB"])
             if best.get("vramMiB") is None:
                 missing = missing or ("fit.missing", {"field": "vramMiB"})
             else:
