@@ -14,3 +14,7 @@ Lo que queda abierto; la bitácora solo apunta aquí. Se añade y se quita en es
 - H1, revisión (leve): los esquemas se leen con `json.loads` (clave duplicada en silencio) y sin caché; usar `gart.canon.loads_strict`
 - H1, revisión (leve): gart da por entero `1.0`, así que `"bytes": 4920752841.0` valida; rechazar float en bytes/MiB/layers o escribir en el DDD que se acepta (invariante 10)
 - H1, revisión (leve): `AGENTS.md` e invariante 12 dicen «nada fuera de la stdlib»; nombrar ahí la copia vendorizada de `gart`
+- H3, revisión (leve): `_pools` calla si la máquina tiene API de GPU en común con la regla pero `gpus` vacío; sin `cpu` sale `fit.no_compute_api` en vez de `fit.missing` (`field: gpus`)
+- H3, revisión (leve): `validate_catalog` no comprueba que cada motor de un modelo tenga regla en `memory-rules.json` (el esquema dice que sí); añadir `catalog.no_rule` o corregir la descripción
+- H3, revisión (leve): `tests/test_fit.py` (memoryHints) usa un margen fijo de 512 en vez de `params["marginMiB"]` y no comprueba antes que el veredicto no sea `unknown`
+- H3, revisión (leve): `Fit` es `frozen` con `params: dict`, así que `hash(Fit)` lanza TypeError; `field(hash=False)` o params inmutables

@@ -471,3 +471,10 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: Fit como dataclass congelada: verdict, estimateMiB (None si falta la regla o el tamaño), availableMiB, pool (gpu | shared | ram | None) y reason como código estable más parámetros (p. ej. ('missing', {'field': 'vramMiB'}), ('no-rule', {'runtime': 'x'})). Los textos es/en de los motivos llegan con H8; hasta entonces, los tests comprueban el código
 - Answer: a
 - Answered: 2026-11-28
+
+## Q-53
+- Refs: H3
+- Status: open
+- Asked: 2026-11-28
+- Question: Revisión del bloque H3 (medio): fit da la bolsa shared a una GPU integrada aunque la API común solo corra en la discreta (iGPU Intel + dGPU NVIDIA con computeApis [cuda] y regla [cuda] ⇒ fits en shared, cuando CUDA no corre en la Intel). ¿Cómo se ata cada bolsa a las API de su GPU?
+- Recommendation: a) en fit, un mapa vendor→API (nvidia: cuda, vulkan; amd: rocm, vulkan; intel: vulkan; apple: metal); una GPU solo da su bolsa si la API común está en las de su vendor; vendor null ⇒ se aceptan todas las de la máquina (lo de hoy). Sin cambiar el esquema de máquina. b) computeApis por GPU en gmod.machine/1 (más exacto, cambia esquema y hardware.py). c) dejarlo como está y apuntarlo en la spec.
