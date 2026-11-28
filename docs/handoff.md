@@ -9,9 +9,9 @@
 | Campo | Valor |
 |---|---|
 | **Rama** | `claude/release-v0.1.0` (sesión local; reúne `ccr-c9ef964f-38192u` y `ccr-99b59083-p3cl8m`) |
-| **Fase / tarea** | 0.2: H4 en diseño (Q-54 a Q-58 abiertas); H1 y H3 hechos (`gart/` vendorizado en `7d26869`, esquemas `gmod.*/0` y `validate_catalog`) y `stt` en el catálogo (Whisper, Q-43, Q-44) |
+| **Fase / tarea** | 0.2: H4 en curso (spec en `docs/tasks/H4.md`, Q-54 a Q-58 con la recomendación); H1 y H3 hechos (`gart/` vendorizado en `7d26869`, esquemas `gmod.*/0` y `validate_catalog`) y `stt` en el catálogo (Whisper, Q-43, Q-44) |
 | **Último punto estable** | Revisión del bloque H3 cerrada: `fit` ata cada bolsa a las API del fabricante de su GPU (Q-53 a, `Findings: 1`); check en verde |
-| **Siguiente paso** | H4 (`recommend`): esperar las respuestas a Q-54 a Q-58 y escribir la spec en `docs/tasks/H4.md`; luego test rojo e implementación. Presupuesto de compactaciones: 1. Pedir a gart imports relativos (Q-42: a). D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
+| **Siguiente paso** | H4: test rojo e implementación de `load_catalog` y `recommend` según `docs/tasks/H4.md`. Presupuesto de compactaciones: 1. Pedir a gart imports relativos (Q-42: a). D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación

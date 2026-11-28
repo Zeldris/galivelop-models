@@ -483,35 +483,45 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-54
 - Refs: H4
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Cómo recibe recommend el catálogo? a) un Catalog cargado con load_catalog(root); b) los documentos sueltos (models, licenses, rules) como argumentos
 - Recommendation: a) load_catalog(root) -> Catalog: dataclass congelada con models, licenses (por id), machines (por id) y rules; corre validate_catalog y lanza CatalogError con los problemas si no valida. recommend(task, machine, catalog, *, license_use=None), con machine = id de máquina del catálogo, documento gmod.machine/0 o Hardware (D-21). Es la raíz del agregado del DDD y la usarán la CLI (H8) y la exportación (H7)
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-55
 - Refs: H4
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿En qué orden van las recomendaciones? a) fits antes que tight y, dentro, la estimación mayor primero; b) la más ligera primero; c) solo por id de variante
 - Recommendation: a) fits antes que tight; dentro de cada veredicto, la estimación de memoria mayor primero (sin medidas, el modelo más grande que cabe es el mejor indicio de calidad; GVE lo afinará en H6); empates por id de variante (invariante 5). b) la más ligera primero. c) solo por id
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-56
 - Refs: H4
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Se devuelven todas las variantes que encajan o una por modelo? a) todas; b) la mejor de cada modelo
 - Recommendation: a) todas las variantes que encajan, sin agrupar por modelo: el consumidor elige y aplica su reserva (D-22) sobre estimate_mib. b) solo la mejor variante de cada modelo
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-57
 - Refs: H4
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Qué lleva una Recommendation y qué pasa con los LoRA? a) model, variant, license y el Fit entero; LoRA fuera en v1; b) otra forma
 - Recommendation: a) Recommendation dataclass congelada: model, variant, license (id) y fit (el Fit entero, que lleva motor, bolsa, estimación y motivo), con to_dict() camelCase. Los LoRA (modelos con base) quedan fuera de recommend en v1: no corren solos
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-58
 - Refs: H4
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Cómo falla recommend ante una llamada mal hecha (tarea, uso de licencia o máquina que no existen)? a) ValueError con código estable; b) lista vacía
 - Recommendation: a) errores de llamada con ValueError y código estable en args: tarea fuera de la lista cerrada (recommend.unknown_task), license_use fuera de commercial/redistribute/derivatives (recommend.unknown_use), id de máquina que no existe (recommend.unknown_machine). license_use es un solo uso, como en el DDD y la CLI; una licencia que no está en licenses.json cuenta como unconfirmed
+- Answer: a
+- Answered: 2026-11-28
