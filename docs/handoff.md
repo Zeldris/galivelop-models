@@ -10,8 +10,8 @@
 |---|---|
 | **Rama** | `claude/release-v0.1.0` (sesión local; reúne `ccr-c9ef964f-38192u` y `ccr-99b59083-p3cl8m`) |
 | **Fase / tarea** | 0.2: H1 y H3 hechos (`gart/` vendorizado en `7d26869`, esquemas `gmod.*/0` y `validate_catalog`) y `stt` en el catálogo (Whisper, Q-43, Q-44) |
-| **Último punto estable** | H3 hecho: `gmod/fit.py`, `catalog/memory-rules.json` y `sharedMemory` en las máquinas; check en verde (commit `feat(H3)`) |
-| **Siguiente paso** | Revisión del bloque H1 + stt + H3 hecha (base `2dcd7cc`): 1 medio a la espera de Q-53 (bolsas atadas a la API de cada GPU), 4 leves en `pending.md`. Con la respuesta, arreglo (commit con `Findings: 1`) y luego H4 (`recommend`). Pedir a gart imports relativos (Q-42: a). D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
+| **Último punto estable** | Revisión del bloque H3 cerrada: `fit` ata cada bolsa a las API del fabricante de su GPU (Q-53 a, `Findings: 1`); check en verde |
+| **Siguiente paso** | H4 (`recommend`). Pedir a gart imports relativos (Q-42: a). D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación

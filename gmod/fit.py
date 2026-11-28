@@ -45,6 +45,15 @@ def estimate_mib(variant_bytes: int, rule: dict) -> int:
     return -(-scaled // (1000 * MIB)) + rule["overheadMiB"]
 
 
+# Compute APIs each GPU maker runs (Q-53 a); `vendor` is compared without case. A null or unknown vendor accepts them all.
+VENDOR_APIS = {"nvidia": ("cuda", "vulkan"), "amd": ("rocm", "vulkan"), "intel": ("vulkan",), "apple": ("metal",)}
+
+
+def _usable(gpu: dict, common: set) -> bool:
+    apis = VENDOR_APIS.get(str(gpu.get("vendor") or "").lower())
+    return bool(common) if apis is None else bool(common & set(apis))
+
+
 def _pools(machine: dict, rule: dict) -> tuple[list[tuple[str, int]], Optional[tuple[str, dict]]]:
     """The memory pools of `machine` this rule can use, in order gpu/shared/ram, and the first missing-data reason."""
     apis = set(machine.get("computeApis") or [])
@@ -52,7 +61,9 @@ def _pools(machine: dict, rule: dict) -> tuple[list[tuple[str, int]], Optional[t
     pools: list[tuple[str, int]] = []
     missing: Optional[tuple[str, dict]] = None
     gpus = machine.get("gpus") or []
-    if apis & allowed & set(GPU_APIS) and gpus:
+    common = apis & allowed & set(GPU_APIS)
+    gpus = [g for g in gpus if _usable(g, common)]
+    if gpus:
         # Integrated + discrete (a laptop): both pools are tried and the best verdict wins.
         shared = [g for g in gpus if g.get("sharedMemory")]
         dedicated = [g for g in gpus if not g.get("sharedMemory")]

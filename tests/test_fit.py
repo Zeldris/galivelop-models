@@ -31,8 +31,8 @@ def variant(mib=1000, runtimes=("eng",), **over):
     return base
 
 
-def gpu(vram, shared=False, integrated=False):
-    return {"name": "g", "vendor": None, "integrated": integrated, "vramMiB": vram, "sharedMemory": shared}
+def gpu(vram, shared=False, integrated=False, vendor=None):
+    return {"name": "g", "vendor": vendor, "integrated": integrated, "vramMiB": vram, "sharedMemory": shared}
 
 
 def machine(gpus=(), ram=8000, apis=("cuda", "vulkan", "cpu")):
@@ -144,6 +144,32 @@ class PoolTest(unittest.TestCase):
         self.assertEqual((got.verdict, got.pool, got.available_mib), ("fits", "gpu", 8000))
         got = fit(variant(6000), machine(laptop, ram=32000, apis=("cuda", "vulkan")), rules_doc(rule(marginMiB=5000)))
         self.assertEqual((got.verdict, got.pool, got.available_mib), ("fits", "shared", 32000))
+
+    def test_pool_needs_an_api_of_the_gpu_vendor(self):  # Q-53 a
+        laptop = [gpu(None, shared=True, integrated=True, vendor="Intel"), gpu(4096, vendor="NVIDIA")]
+        cuda = rules_doc(rule(computeApis=["cuda"]))
+        got = fit(variant(8000), machine(laptop, ram=32000, apis=("cuda",)), cuda)
+        self.assertEqual((got.verdict, got.pool, got.available_mib), ("no", "gpu", 4096))  # Intel iGPU has no cuda
+        # vendor null or unknown: every shared API of machine and rule is accepted
+        for vendor in (None, "Acme"):
+            anon = [gpu(None, shared=True, integrated=True, vendor=vendor), gpu(4096, vendor="NVIDIA")]
+            got = fit(variant(8000), machine(anon, ram=32000, apis=("cuda",)), cuda)
+            self.assertEqual((got.verdict, got.pool), ("fits", "shared"))
+        # case-insensitive vendor; vulkan is shared by Intel and NVIDIA
+        got = fit(variant(8000), machine([gpu(None, shared=True, vendor="INTEL")], ram=32000, apis=("vulkan",)), cuda)
+        self.assertEqual(got.verdict, "unknown")
+        got = fit(variant(8000), machine(laptop, ram=32000, apis=("cuda", "vulkan")), rules_doc(rule(computeApis=["vulkan"])))
+        self.assertEqual((got.verdict, got.pool), ("fits", "shared"))
+
+    def test_discrete_pick_is_among_gpus_with_a_matching_api(self):
+        gpus = [gpu(16000, vendor="AMD"), gpu(8000, vendor="NVIDIA")]
+        got = fit(variant(1000), machine(gpus, ram=1, apis=("cuda",)), rules_doc(rule(computeApis=["cuda"])))
+        self.assertEqual((got.pool, got.available_mib), ("gpu", 8000))
+
+    def test_ram_is_reported_when_the_igpu_api_does_not_match(self):
+        got = fit(variant(1000), machine([gpu(None, shared=True, integrated=True, vendor="Intel")], ram=4000, apis=("cuda", "cpu")),
+                  rules_doc(rule(computeApis=["cuda", "cpu"])))
+        self.assertEqual((got.verdict, got.pool, got.available_mib), ("fits", "ram", 4000))
 
     def test_largest_gpu_alone(self):
         got = fit(variant(1000), machine([gpu(600), gpu(1200)], ram=1, apis=("cuda",)), rules_doc())
