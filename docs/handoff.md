@@ -11,7 +11,7 @@
 | **Rama** | `claude/release-v0.1.0` (sesión local; reúne `ccr-c9ef964f-38192u` y `ccr-99b59083-p3cl8m`) |
 | **Fase / tarea** | 0.2: H1 hecho (`gart/` vendorizado en `7d26869`, esquemas `gmod.*/0` y `validate_catalog`) y `stt` en el catálogo (Whisper, Q-43, Q-44) |
 | **Último punto estable** | Las dos ramas remotas fusionadas aquí; Q-38 a Q-40 de la rama stt pasan a Q-43 a Q-45. H5 probado de verdad en la Steam Deck LCD (2026-11-28) |
-| **Siguiente paso** | H3 (`fit`) con `sharedMemory` en `gmod.machine/0` (Q-45: b); pedir a gart imports relativos (Q-42: a). Revisión de H1, stt y H3 antes de `main`. D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
+| **Siguiente paso** | H3 (`fit`): esperar respuesta a Q-46 a Q-52 (diseño de la tabla de reglas, veredictos, bolsas de memoria, `sharedMemory`, motivo del Fit; cada una con recomendación) y luego spec en `docs/tasks/H3.md`, test en rojo e implementación. Presupuesto de compactaciones: 1; pedir a gart imports relativos (Q-42: a). Revisión de H1, stt y H3 antes de `main`. D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
