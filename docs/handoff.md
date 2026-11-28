@@ -9,9 +9,9 @@
 | Campo | Valor |
 |---|---|
 | **Rama** | `ccr-99b59083-p3cl8m` (desde `main` tras el PR #3) |
-| **Fase / tarea** | 0.2, H1 en curso (Q-40: a): `gart/` vendorizado a mano, fijado a `7d26869` |
-| **Último punto estable** | Invariante 12: `tests/test_skeleton.py` rechaza también las importaciones en tiempo de ejecución (`importlib`, `__import__`) |
-| **Siguiente paso** | H1: copiar `gart/` (`7d26869`) con `VENDOR.json` y test de sha256; luego esquemas `gmod.model/0` y `gmod.machine/0` con ejemplos, y validar `catalog/`. D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
+| **Fase / tarea** | 0.2, H1 en curso (Q-40: a): `gart/` vendorizado a mano en la raíz, fijado a `7d26869` (hecho) |
+| **Último punto estable** | H1 primer trozo: `gart/` (copia sin editar de `7d26869`, `gart/VENDOR.json` escrito a mano: sin tag ni kit gart-H11) con test de sha256 y smoke test; el invariante 12 cubre también `gart/` |
+| **Siguiente paso** | H1: esquemas `gmod.model/0` y `gmod.machine/0` con ejemplos, y validar `catalog/`. D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
@@ -20,6 +20,7 @@
 
 ## Hecho (5 últimas)
 
+0. 2026-11-28 — H1: `gart/` vendorizado en la raíz (sibling de `gmod/`, imports absolutos intactos), `VENDOR.json` y tests.
 1. 2026-11-27 — Tag `v0.1.0` comprobado en el remoto, sobre `b6fe0e8`.
 2. 2026-11-27 — Invariante 12: el test del esqueleto rechaza importaciones dinámicas en `gmod`.
 3. 2026-11-27 — PR #3 fusionado: versión `0.1.0` en `main`.
