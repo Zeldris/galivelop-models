@@ -7,6 +7,7 @@ Datos del catálogo, migrados en H2 desde los cuatro consumidores. Solo JSON; lo
 - `licenses.json`: licencias (`apache-2.0`, `llama-3.1-community`, `mit`, `unconfirmed`).
 - `models/<model-id>.json`: 15 modelos, una variante cada uno (formato, cuantización, origen, archivos, licencia, runtimes).
 - `machines/<id>.json`: 2 máquinas, `steam-deck` y `gpu-12gb`.
+- `memory-rules.json`: reglas de memoria por motor para `fit` (H3, a mano, D-5).
 
 ## Forma
 

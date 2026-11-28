@@ -9,7 +9,8 @@
       "name": "GPU discreta",
       "vendor": null,
       "integrated": false,
-      "vramMiB": 12288
+      "vramMiB": 12288,
+      "sharedMemory": false
     }
   ],
   "computeApis": [],

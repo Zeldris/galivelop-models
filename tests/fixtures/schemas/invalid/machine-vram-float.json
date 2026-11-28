@@ -13,7 +13,8 @@
       "name": "AMD RDNA2",
       "vendor": "AMD",
       "integrated": true,
-      "vramMiB": 12.5
+      "vramMiB": 12.5,
+      "sharedMemory": true
     }
   ],
   "computeApis": [

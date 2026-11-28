@@ -29,6 +29,12 @@ mantiene al día (skill `domain-modeling`). El flujo nunca sobrescribe este arch
 
 <!-- **Término**: definición, y dónde vive en el código. -->
 
+- **Regla de memoria (`MemoryRule`)**: por motor (`runtime`), los formatos y cuantizaciones que cubre, las APIs de
+  cómputo que admite, el factor sobre los bytes de la variante (en milésimas), la sobrecarga y el margen en MiB;
+  mantenida a mano (D-5). Vive en `catalog/memory-rules.json` (`gmod.memory_rules/0`) y la usa `gmod.fit.fit`.
+- **Memoria compartida (`sharedMemory`)**: marca de una GPU de `gmod.machine/0` que usa la RAM del sistema; `fit` usa
+  entonces `ramMiB` como bolsa. `Gpu.shared_memory` en `gmod/hardware.py` (verdadero en toda GPU integrada).
+
 - **Variante** (*Variant*): una forma concreta de descargar y ejecutar un Modelo (formato y cuantización). Su id es
   `<model-id>:<formato>-<cuant>` en minúsculas, p. ej. `qwen3-8b-instruct:gguf-q4_k_m`.
 - **Encaje** (*Fit*): el veredicto de si una Variante cabe en una Máquina: `fits`, `tight`, `no` o `unknown` (falta un

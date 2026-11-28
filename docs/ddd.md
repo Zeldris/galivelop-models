@@ -114,6 +114,7 @@ que compara la huella del manifiesto, igual que con `gart`. No hay servidor ni d
 **Artefactos** (esquemas en este repo, validados con `gart`):
 - `gmod.model/0` (modelo con sus variantes, archivos y orígenes)
 - `gmod.machine/0`
+- `gmod.memory_rules/0` (reglas de memoria por motor para `fit`, `catalog/memory-rules.json`)
 - `gmod.measurement/0`
 - `gmod.catalog/0`
 - `gmod.manifest/0`

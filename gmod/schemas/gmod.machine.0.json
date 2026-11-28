@@ -69,7 +69,8 @@
           "name",
           "vendor",
           "integrated",
-          "vramMiB"
+          "vramMiB",
+          "sharedMemory"
         ],
         "additionalProperties": false,
         "properties": {
@@ -92,6 +93,10 @@
               "null"
             ],
             "minimum": 1
+          },
+          "sharedMemory": {
+            "type": "boolean",
+            "description": "true si la GPU usa la RAM del sistema (memoria unificada); fit usa entonces ramMiB (H3)."
           }
         }
       }

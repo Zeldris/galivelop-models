@@ -57,9 +57,11 @@ class Gpu:
     vendor: Optional[str]
     integrated: bool
     vram_mib: Optional[int]
+    shared_memory: bool  # the GPU uses system RAM (unified memory); true for every integrated GPU
 
     def to_dict(self) -> dict:
-        return {"name": self.name, "vendor": self.vendor, "integrated": self.integrated, "vramMiB": self.vram_mib}
+        return {"name": self.name, "vendor": self.vendor, "integrated": self.integrated, "vramMiB": self.vram_mib,
+                "sharedMemory": self.shared_memory}
 
 
 @dataclass(frozen=True)
@@ -153,7 +155,8 @@ def _is_integrated(vendor: Optional[str], device_id: Optional[str], vram_mib: Op
 def _gpu(name, vendor, device_id, vram_mib) -> Gpu:
     integrated = _is_integrated(vendor, device_id, vram_mib)
     # An integrated GPU shares system RAM: its carve-out is not dedicated VRAM (catalog `steam-deck`).
-    return Gpu(name=name, vendor=vendor, integrated=integrated, vram_mib=None if integrated else vram_mib)
+    return Gpu(name=name, vendor=vendor, integrated=integrated, vram_mib=None if integrated else vram_mib,
+               shared_memory=integrated)
 
 
 def _ordered(apis) -> tuple:

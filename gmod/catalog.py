@@ -19,6 +19,7 @@ SCHEMA_FILES = {
     "gmod.model/0": "gmod.model.0.json",
     "gmod.machine/0": "gmod.machine.0.json",
     "gmod.licenses/0": "gmod.licenses.0.json",
+    "gmod.memory_rules/0": "gmod.memory_rules.0.json",
 }
 
 
@@ -131,6 +132,21 @@ def validate_catalog(root: str | Path, schemas_dir: str | Path | None = None) ->
             license_ids.add(lic["id"])
             if lic["id"] == "unconfirmed" and lic["uses"]:
                 problems.append(Problem("licenses.json", f"/licenses/{i}/uses", "catalog.unconfirmed_uses", {}))
+    rules_path = root / "memory-rules.json"
+    if not rules_path.exists():
+        problems.append(Problem("memory-rules.json", "", "catalog.missing", {}))
+    else:
+        rules = _read(rules_path, "memory-rules.json", "gmod.memory_rules/0", problems, sdir)
+        if rules:
+            seen: set[str] = set()
+            for i, rule in enumerate(rules["rules"]):
+                if rule["runtime"] in seen:
+                    problems.append(Problem("memory-rules.json", f"/rules/{i}/runtime", "catalog.duplicate", {"id": rule["runtime"]}))
+                seen.add(rule["runtime"])
+                for key in ("formats", "quantizations", "computeApis"):
+                    for j, item in enumerate(rule[key]):
+                        if item in rule[key][:j]:
+                            problems.append(Problem("memory-rules.json", f"/rules/{i}/{key}/{j}", "catalog.duplicate", {"id": item}))
     models: dict[str, tuple[str, dict]] = {}
     variant_ids: dict[str, str] = {}
     for path in sorted((root / "models").glob("*.json")):

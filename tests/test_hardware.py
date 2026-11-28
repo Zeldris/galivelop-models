@@ -86,6 +86,8 @@ class LinuxTest(unittest.TestCase):
         self.assertEqual(hw.gpus[0].vendor, "AMD")
         self.assertTrue(hw.gpus[0].integrated)
         self.assertIsNone(hw.gpus[0].vram_mib, "the APU carve-out is not dedicated VRAM")
+        self.assertEqual(hw.gpus[0].to_dict(), machine["gpus"][0] | {"name": hw.gpus[0].name},
+                         "an integrated GPU declares sharedMemory like the catalog machine")
 
     def test_nvidia_cuda_reads_vram_from_nvidia_smi(self):
         box = self.box
@@ -102,6 +104,7 @@ class LinuxTest(unittest.TestCase):
         self.assertEqual((nvidia.name, nvidia.vendor, nvidia.integrated, nvidia.vram_mib),
                          ("NVIDIA GeForce RTX 3060", "NVIDIA", False, 12288))
         self.assertEqual((intel.vendor, intel.integrated, intel.vram_mib), ("Intel", True, None))
+        self.assertEqual((nvidia.shared_memory, intel.shared_memory), (False, True))
 
     def test_nvidia_without_nvidia_smi_keeps_vram_unknown(self):
         box = self.box

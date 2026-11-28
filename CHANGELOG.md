@@ -7,6 +7,7 @@ la regla y las tareas de cada versión, en el [roadmap](docs/roadmap.md).
 
 ### Added
 
+- `gmod.fit.fit(variant, machine, rules)` (H3): veredicto `fits`, `tight`, `no` o `unknown` con memoria estimada, bolsa (`gpu`, `shared`, `ram`) y motivo; `catalog/memory-rules.json` con el esquema `gmod.memory_rules/0` (`validate_catalog` lo exige) y `sharedMemory` obligatorio en las GPU de `gmod.machine/0` (`Gpu.shared_memory` en `detect_hardware`).
 - Esquemas `gmod.model/0`, `gmod.machine/0` y `gmod.licenses/0` en `gmod/schemas/` (datos del paquete), y `gmod.validate_catalog(root)` (valida `catalog/` con `gart`; devuelve `Problem(file, pointer, code, params)`).
 - `stt` en el catálogo: `whisper-large-v3-turbo` (q5_0) y `whisper-small` (q8_0) con `whisper.cpp` v1.9.6, y la licencia `mit` en `catalog/licenses.json`.
 

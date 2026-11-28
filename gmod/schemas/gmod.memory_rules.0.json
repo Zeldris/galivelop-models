@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gmod.memory_rules/0",
+  "description": "Reglas de memoria por motor para fit (H3, D-5): factor sobre los bytes de la variante, sobrecarga y margen en MiB enteros (D-23). Los motores y las listas sin repetidos los comprueba gmod/catalog.py.",
+  "type": "object",
+  "required": [
+    "kind",
+    "rules"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "gmod.memory_rules/0"
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "runtime",
+          "formats",
+          "quantizations",
+          "computeApis",
+          "weightsFactorPermille",
+          "overheadMiB",
+          "marginMiB",
+          "notes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "runtime": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]*$"
+          },
+          "formats": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "quantizations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "computeApis": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "cuda",
+                "rocm",
+                "vulkan",
+                "metal",
+                "cpu"
+              ]
+            }
+          },
+          "weightsFactorPermille": {
+            "type": "integer",
+            "minimum": 1000
+          },
+          "overheadMiB": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "marginMiB": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

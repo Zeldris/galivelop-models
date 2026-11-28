@@ -42,6 +42,11 @@ INVALID = {
     "machine-vram-float": [("/gpus/0/vramMiB", "type")],
     "machine-ram-in-gb": [("", "required"), ("/ramGB", "additionalProperties")],
     "machine-api-unknown": [("/computeApis/2", "enum")],
+    # H3: memory rules and sharedMemory
+    "memory-rules-no-field": [("/rules/0", "required")],
+    "memory-rules-factor-low": [("/rules/0/weightsFactorPermille", "minimum")],
+    "memory-rules-float": [("/rules/0/overheadMiB", "type")],
+    "machine-no-shared-memory": [("/gpus/0", "required")],
     "model-wrong-kind": [("/kind", "catalog.kind")],
 }
 
@@ -96,6 +101,7 @@ class CatalogTest(unittest.TestCase):
         for sub in ("models", "machines"):
             (self.tmp / sub).mkdir()
         shutil.copy(ROOT / "catalog" / "licenses.json", self.tmp / "licenses.json")
+        shutil.copy(ROOT / "catalog" / "memory-rules.json", self.tmp / "memory-rules.json")
         shutil.copy(ROOT / "catalog" / "machines" / "steam-deck.json", self.tmp / "machines")
         shutil.copy(FIXTURES / "valid" / "model-ollama.json", self.tmp / "models" / "llama3.1-8b-instruct.json")
         shutil.copy(FIXTURES / "valid" / "model-lora.json", self.tmp / "models" / "llama3.1-8b-lora.json")
@@ -155,6 +161,26 @@ class CatalogTest(unittest.TestCase):
         shutil.copy(FIXTURES / "valid" / "model-ollama.json", self.tmp / "models" / "llama3.1-8b-lora.json")
         codes = [(p.file, p.code) for p in validate_catalog(self.tmp)]
         self.assertIn(("models/llama3.1-8b-lora.json", "catalog.duplicate"), codes)
+
+    def test_memory_rules_must_exist(self):
+        (self.tmp / "memory-rules.json").unlink()
+        self.assertEqual([(p.file, p.code) for p in validate_catalog(self.tmp)], [("memory-rules.json", "catalog.missing")])
+
+    def test_duplicate_memory_rule_runtime(self):
+        path = self.tmp / "memory-rules.json"
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        doc["rules"].append(doc["rules"][0])
+        path.write_text(json.dumps(doc), encoding="utf-8")
+        got = [(p.file, p.pointer, p.code, p.params) for p in validate_catalog(self.tmp)]
+        self.assertEqual(got, [("memory-rules.json", f"/rules/{len(doc['rules']) - 1}/runtime", "catalog.duplicate", {"id": "ollama"})])
+
+    def test_repeated_item_in_a_rule_list(self):
+        path = self.tmp / "memory-rules.json"
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        doc["rules"][0]["formats"] = ["gguf", "gguf"]
+        path.write_text(json.dumps(doc), encoding="utf-8")
+        got = [(p.pointer, p.code) for p in validate_catalog(self.tmp)]
+        self.assertEqual(got, [("/rules/0/formats/1", "catalog.duplicate")])
 
     def test_steam_deck_must_exist(self):
         (self.tmp / "machines" / "steam-deck.json").unlink()
