@@ -1,6 +1,9 @@
 """H1: the gmod.model/0 and gmod.machine/0 schemas, their examples and the catalog (docs/ddd.md invariants 1, 2, 3, 10)."""
 import json
+import os
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -20,6 +23,7 @@ INVALID = {
     "model-file-no-sha256": [("/variants/0/files/0", "required")],
     "model-file-no-role": [("/variants/0/files/1", "required")],
     "model-hf-file-without-hf": [("/variants/0/files/0", "required")],
+    "model-url-file-with-hf": [("/variants/0/files/0/hf", "additionalProperties"), ("/variants/0/files/1/hf", "additionalProperties")],
     "model-hf-no-files": [("/variants/0/files", "minItems")],
     "model-hf-bytes-sum": [("/variants/0/bytes", "catalog.bytes_sum")],
     "model-ollama-no-digest": [("/variants/0/source", "required")],
@@ -60,7 +64,7 @@ class ExamplesTest(unittest.TestCase):
                 self.assertEqual(validate_file(path), [])
 
     def test_every_invalid_example_is_listed_and_exists(self):
-        on_disk = sorted(p.stem for p in (FIXTURES / "invalid").glob("*.json") if p.stem != "model-lora-base-missing")
+        on_disk = sorted(p.stem for p in (FIXTURES / "invalid").glob("*.json") if not p.stem.startswith("model-lora-"))
         self.assertEqual(on_disk, sorted(INVALID))
 
     def test_invalid_examples_fail_with_their_code_and_path(self):
@@ -68,6 +72,15 @@ class ExamplesTest(unittest.TestCase):
             with self.subTest(example=name):
                 got = sorted((p.pointer, p.code) for p in validate_file(FIXTURES / "invalid" / f"{name}.json"))
                 self.assertEqual(got, sorted(expected))
+
+    def test_reused_gart_codes_carry_gart_params(self):
+        # a consumer with one template per code must get the same params gart gives
+        def one(name):
+            (problem,) = validate_file(FIXTURES / "invalid" / f"{name}.json")
+            return problem.params
+        self.assertEqual(one("model-ollama-no-digest"), {"name": "digest"})
+        self.assertEqual(one("model-hf-no-files"), {"limit": 1})
+        self.assertEqual(one("model-hf-file-without-hf"), {"name": "hf"})
 
     def test_nullable_vram_is_valid(self):
         # the steam-deck gap of docs/records/pending.md: vramMiB null stays legal
@@ -86,6 +99,38 @@ class CatalogTest(unittest.TestCase):
         shutil.copy(ROOT / "catalog" / "machines" / "steam-deck.json", self.tmp / "machines")
         shutil.copy(FIXTURES / "valid" / "model-ollama.json", self.tmp / "models" / "llama3.1-8b-instruct.json")
         shutil.copy(FIXTURES / "valid" / "model-lora.json", self.tmp / "models" / "llama3.1-8b-lora.json")
+
+    def test_lora_base_cannot_be_itself(self):
+        path = self.tmp / "models" / "llama3.1-8b-lora.json"
+        shutil.copy(FIXTURES / "invalid" / "model-lora-base-self.json", path)
+        got = [(p.file, p.pointer, p.code) for p in validate_catalog(self.tmp)]
+        self.assertEqual(got, [("models/llama3.1-8b-lora.json", "/base", "catalog.base_self")])
+
+    def test_lora_base_cannot_be_a_lora(self):
+        shutil.copy(FIXTURES / "invalid" / "model-lora-on-lora.json", self.tmp / "models" / "llama3.1-8b-lora2.json")
+        got = [(p.file, p.pointer, p.code) for p in validate_catalog(self.tmp)]
+        self.assertEqual(got, [("models/llama3.1-8b-lora2.json", "/base", "catalog.base_chain")])
+
+    def test_lora_cycle_is_rejected(self):
+        for n, other in (("a", "b"), ("b", "a")):
+            doc = json.loads((FIXTURES / "valid" / "model-lora.json").read_text(encoding="utf-8"))
+            doc["id"], doc["base"] = f"lora-{n}", f"lora-{other}"
+            doc["variants"][0]["id"] = f"lora-{n}:gguf-q4_k_m"
+            (self.tmp / "models" / f"lora-{n}.json").write_text(json.dumps(doc), encoding="utf-8")
+        codes = sorted((p.file, p.code) for p in validate_catalog(self.tmp) if p.file.startswith("models/lora-"))
+        self.assertEqual(codes, [("models/lora-a.json", "catalog.base_chain"), ("models/lora-b.json", "catalog.base_chain")])
+
+    def test_installed_copy_validates_outside_the_repo(self):
+        # gmod and gart copied away from the repo (as an installed package would be): schemas travel with gmod
+        site = self.tmp / "site"
+        site.mkdir()
+        for pkg in ("gmod", "gart"):
+            shutil.copytree(ROOT / pkg, site / pkg, ignore=shutil.ignore_patterns("__pycache__"))
+        code = "import gmod, sys; print(gmod.validate_catalog(sys.argv[1]))"
+        env = {"PYTHONPATH": str(site), "PATH": os.environ.get("PATH", "")}
+        res = subprocess.run([sys.executable, "-c", code, str(self.tmp)], cwd=self.tmp / "site" / "..", env=env,
+                             capture_output=True, text=True)
+        self.assertEqual((res.returncode, res.stdout.strip(), res.stderr), (0, "[]", ""))
 
     def test_the_real_catalog_validates(self):
         self.assertEqual(validate_catalog(ROOT / "catalog"), [])

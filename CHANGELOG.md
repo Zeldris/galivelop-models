@@ -7,7 +7,7 @@ la regla y las tareas de cada versión, en el [roadmap](docs/roadmap.md).
 
 ### Added
 
-- Esquemas `gmod.model/0`, `gmod.machine/0` y `gmod.licenses/0` en `schemas/`, y `gmod.validate_catalog(root)` (valida `catalog/` con `gart`; devuelve `Problem(file, pointer, code, params)`).
+- Esquemas `gmod.model/0`, `gmod.machine/0` y `gmod.licenses/0` en `gmod/schemas/` (datos del paquete), y `gmod.validate_catalog(root)` (valida `catalog/` con `gart`; devuelve `Problem(file, pointer, code, params)`).
 
 ## [0.1.0] - 2026-11-27
 

@@ -14,7 +14,7 @@ from gart.canon import CanonError, loads_strict
 from gart.kind_id import KindId, KindIdError
 from gart.schema import check_schema, validate
 
-SCHEMAS_DIR = Path(__file__).resolve().parent.parent / "schemas"
+SCHEMAS_DIR = Path(__file__).resolve().parent / "schemas"  # package data (pyproject: gmod = ["schemas/*.json"])
 SCHEMA_FILES = {
     "gmod.model/0": "gmod.model.0.json",
     "gmod.machine/0": "gmod.machine.0.json",
@@ -62,7 +62,7 @@ def _model_checks(doc: dict) -> list[tuple[str, str, dict]]:
         if src["type"] == "ollama":
             for key in ("name", "tag", "digest"):
                 if key not in src:
-                    out.append((f"{vp}/source", "required", {"missing": key}))
+                    out.append((f"{vp}/source", "required", {"name": key}))
             if files:
                 out.append((f"{vp}/files", "catalog.files_not_allowed", {"source": "ollama"}))
             layers = var.get("layers")
@@ -70,21 +70,21 @@ def _model_checks(doc: dict) -> list[tuple[str, str, dict]]:
                 out.append((f"{vp}/bytes", "catalog.bytes_sum", {"expected": sum(layers.values()), "found": var["bytes"]}))
         else:
             if not files:
-                out.append((f"{vp}/files", "minItems", {"source": src["type"]}))
+                out.append((f"{vp}/files", "minItems", {"limit": 1}))
             elif sum(f["bytes"] for f in files) != var["bytes"]:
                 out.append((f"{vp}/bytes", "catalog.bytes_sum", {"expected": sum(f["bytes"] for f in files), "found": var["bytes"]}))
             for j, f in enumerate(files):
                 fp = f"{vp}/files/{j}"
                 if src["type"] == "hf":
                     if "hf" not in f:
-                        out.append((fp, "required", {"missing": "hf"}))
+                        out.append((fp, "required", {"name": "hf"}))
                     else:
                         h = f["hf"]
                         want = f"https://huggingface.co/{h['repo']}/resolve/{h['revision']}/{h['path']}"
                         if f["url"] != want:
                             out.append((f"{fp}/url", "catalog.url_mismatch", {"expected": want}))
                 elif "hf" in f:
-                    out.append((fp, "additionalProperties", {"key": "hf"}))
+                    out.append((f"{fp}/hf", "additionalProperties", {"name": "hf"}))
     return out
 
 
@@ -152,8 +152,14 @@ def validate_catalog(root: str | Path, schemas_dir: str | Path | None = None) ->
             variant_ids.setdefault(var["id"], rel)
         problems.extend(Problem(rel, p, c, d) for p, c, d in found)
     for rel, doc in models.values():
-        if "base" in doc and doc["base"] not in models:
+        if "base" not in doc:
+            continue
+        if doc["base"] == doc["id"]:
+            problems.append(Problem(rel, "/base", "catalog.base_self", {"base": doc["base"]}))
+        elif doc["base"] not in models:
             problems.append(Problem(rel, "/base", "catalog.unknown_base", {"base": doc["base"]}))
+        elif "base" in models[doc["base"]][1]:
+            problems.append(Problem(rel, "/base", "catalog.base_chain", {"base": doc["base"]}))
     machine_ids: set[str] = set()
     for path in sorted((root / "machines").glob("*.json")):
         rel = f"machines/{path.name}"

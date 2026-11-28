@@ -13,3 +13,6 @@ dependencies = []
 
 [tool.setuptools.packages.find]
 include = ["gmod*", "gart*"]
+
+[tool.setuptools.package-data]
+gmod = ["schemas/*.json"]
