@@ -9,9 +9,9 @@
 | Campo | Valor |
 |---|---|
 | **Rama** | `ccr-99b59083-p3cl8m` (desde `main` tras el PR #3) |
-| **Fase / tarea** | `0.1.0` fusionada en `main` (PR #3). 0.2 (H1, H3, H4, H7) espera al validador de `gart` (D-9), que esta sesión no alcanza; mientras, pendientes leves sin dependencias |
+| **Fase / tarea** | 0.2, H1 en curso (Q-40: a): `gart/` vendorizado a mano, fijado a `7d26869` |
 | **Último punto estable** | Invariante 12: `tests/test_skeleton.py` rechaza también las importaciones en tiempo de ejecución (`importlib`, `__import__`) |
-| **Siguiente paso** | Q-40 y Q-41 abiertas. El 2026-11-28, `gart` tiene el validador en `main` (`7d26869`: gart-H1, H2 y H9), sin tag y sin el kit de vendorizado (gart-H11). Con Q-40: a, H1 empieza vendorizando `gart/` a mano. GVE sigue sin variante, máquina ni motor (D-19) |
+| **Siguiente paso** | H1: copiar `gart/` (`7d26869`) con `VENDOR.json` y test de sha256; luego esquemas `gmod.model/0` y `gmod.machine/0` con ejemplos, y validar `catalog/`. D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
