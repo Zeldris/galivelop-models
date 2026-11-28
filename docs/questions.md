@@ -354,3 +354,17 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: a: esperar al validador de gart; si ya está publicado, dime dónde y empiezo H1
 - Answer: a (la persona delega; el agente elige esperar): gart sigue en DDD (8d7489c, sin tags ni código del validador) y H3 depende de H1 según el DDD, así que (b) no era viable
 - Answered: 2026-11-27
+
+## Q-40
+- Refs: H1
+- Status: open
+- Asked: 2026-11-28
+- Question: El validador de gart ya está en su main (gart-H1, H2, H9; commit 7d26869), sin tag y sin el kit de vendorizado (gart-H11, aún lejos). Solo stdlib; no admite anyOf/oneOf/allOf ni $ref fuera del archivo. ¿Empezamos H1 vendorizándolo a mano (a) o esperamos a un tag o a gart-H11 (b)?
+- Recommendation: a) Empezar H1 ya: copiar gart/ fijado a 7d26869 en gmod/_vendor/gart con un VENDOR.json escrito a mano y un test que rehace los sha256 con hashlib (invariante 11 de gart); al salir gart-H11, se cambia por su kit. Es la copia vendorizada de su ADR 0002, no un validador provisional, así que D-9 se cumple
+
+## Q-41
+- Refs: H1
+- Status: open
+- Asked: 2026-11-28
+- Question: GVE no registra aún variante, máquina ni versión del motor (D-19), y su repo no menciona nuestra petición. ¿Se la haces llegar tú (a) o la abro yo como issue en galivelop-evaluator (b)?
+- Recommendation: a) Pasarle tú la petición docs/records/peticion-gve-2026-11-27.md a GVE (allí no consta en ningún sitio); H6 sigue esperando
