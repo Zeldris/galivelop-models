@@ -411,49 +411,63 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-46
 - Refs: H3
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Dónde vive la tabla de reglas de memoria de H3? a) archivo de datos del catálogo con su propio esquema; b) constante en Python dentro de gmod/fit.py
 - Recommendation: Un archivo de datos catalog/memory-rules.json con su esquema gmod.memory_rules/0 (gart no admite guiones en el nombre del KindId), validado por validate_catalog. El DDD dice que la estimación «sale de la tabla de reglas del catálogo», y así la tabla entra en el manifiesto (H7) y el informe de desviación de H6 la compara con lo medido
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-47
 - Refs: H3
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Con qué clave y qué forma tienen las reglas? a) por cuantización solamente; b) por motor, con los formatos y las cuantizaciones que cubre; c) por motor y tarea
 - Recommendation: b) Una regla por motor (ollama, llama.cpp, stable-diffusion.cpp, qwentts.cpp, whisper.cpp), con: los formatos y las cuantizaciones que cubre, las APIs de cómputo con las que corre, overheadMiB fijo (contexto, activaciones, búferes) y weightsFactor (un multiplicador de los bytes de la variante, en milésimas enteras para no usar floats). Estimación = ceil(bytes/MiB × factor) + overheadMiB. Una variante cuyo motor, formato o cuantización no tiene regla da unknown (invariante 6). Sin regla por tarea: hoy cada motor sirve a una sola tarea, salvo ollama (text, embed, vision)
+- Answer: b
+- Answered: 2026-11-28
 
 ## Q-48
 - Refs: H3
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Qué bytes cuenta la estimación? a) el total de la variante (bytes); b) solo los pesos principales, sin proyector de visión ni draft
 - Recommendation: a) Se cuentan todos los bytes de la variante (pesos, texto, vae, proyector, draft). Es lo más conservador: si un consumidor no carga el proyector le sobra memoria, y nunca al revés. Afinarlo por capa espera a las medidas de GVE (H6)
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-49
 - Refs: H3
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Cómo se separan fits, tight y no? a) con un margen absoluto en MiB por motor; b) con un porcentaje fijo global (p. ej., tight si queda menos del 10 %)
 - Recommendation: Con la reserva del margen en la propia regla (marginMiB por motor): fits si estimación + margen ≤ memoria disponible; tight si estimación ≤ memoria < estimación + margen; no si la memoria es menor que la estimación. El margen es el de «pesos + contexto + margen por motor» del DDD; la reserva del sistema y de la app sigue siendo del consumidor (D-22)
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-50
 - Refs: H3
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Qué memoria compara fit? a) la mejor bolsa entera (una GPU, o la RAM), sin reparto; b) suma de VRAM de todas las GPUs y descarga parcial a RAM
 - Recommendation: a) Bolsas sin reparto: si la máquina tiene una API de cómputo de GPU que el motor admite y una GPU con vramMiB (o sharedMemory), se prueba la GPU más grande; si no cabe y el motor corre en cpu, se prueba ramMiB; el veredicto es el mejor de los dos y el Fit dice qué bolsa usó (gpu, shared o ram). Con sharedMemory hay una sola bolsa, ramMiB. Ni reparto entre varias GPUs ni descarga parcial a CPU (ollama lo hace, pero estimarlo sin medidas sería optimista). computeApis vacío o sin una API que el motor admita ⇒ unknown (gpu-12gb hoy)
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-51
 - Refs: H3
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Cómo entra sharedMemory (Q-45 b)? a) obligatorio en el esquema y detect_hardware lo rellena para GPUs integradas; b) opcional (false por defecto) y la detección no lo toca
 - Recommendation: a) sharedMemory obligatorio (boolean) en cada GPU de gmod.machine/0, para que nadie lo olvide: la steam-deck true, gpu-12gb false. detect_hardware lo pone a true en toda GPU integrada (AMD, Intel), con lo que fit funciona también con el hardware detectado en la Deck; Hardware.to_dict lo saca con la misma clave
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-52
 - Refs: H3
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: ¿Cómo es el motivo de un Fit? a) un código estable con parámetros, y los textos llegan en H8; b) una frase en español ya ahora
 - Recommendation: Fit como dataclass congelada: verdict, estimateMiB (None si falta la regla o el tamaño), availableMiB, pool (gpu | shared | ram | None) y reason como código estable más parámetros (p. ej. ('missing', {'field': 'vramMiB'}), ('no-rule', {'runtime': 'x'})). Los textos es/en de los motivos llegan con H8; hasta entonces, los tests comprueban el código
+- Answer: a
+- Answered: 2026-11-28
