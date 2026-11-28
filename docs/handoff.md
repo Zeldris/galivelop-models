@@ -8,24 +8,23 @@
 
 | Campo | Valor |
 |---|---|
-| **Rama** | `ccr-c9ef964f-38192u` (sigue a `ccr-62bb64e8-2njnfm`) |
-| **Fase / tarea** | Versión `0.1.0` publicada: PR #3 en `main` (`b6fe0e8`) y tag `v0.1.0` sobre ese commit con su release (2026-11-27, confirmado por la persona) |
-| **Último punto estable** | `stt` en el catálogo: `whisper-large-v3-turbo` (q5_0) y `whisper-small` (q8_0) con `whisper.cpp` v1.9.6, licencia `mit` (Q-38, Q-39) |
-| **Siguiente paso** | Respuesta de la persona a Q-40 (memoria unificada de la steam-deck en `fit`, H3; recomendación b: campo explícito en el esquema de H1). 0.2 sigue esperando al validador de `gart` (H1); lo demás de `records/pending.md` es de la persona |
+| **Rama** | `claude/release-v0.1.0` (sesión local; reúne `ccr-c9ef964f-38192u` y `ccr-99b59083-p3cl8m`) |
+| **Fase / tarea** | 0.2: H1 hecho (`gart/` vendorizado en `7d26869`, esquemas `gmod.*/0` y `validate_catalog`) y `stt` en el catálogo (Whisper, Q-43, Q-44) |
+| **Último punto estable** | Las dos ramas remotas fusionadas aquí; Q-38 a Q-40 de la rama stt pasan a Q-43 a Q-45. H5 probado de verdad en la Steam Deck LCD (2026-11-28) |
+| **Siguiente paso** | Respuestas de la persona a Q-42 (dónde va `gart`) y Q-45 (memoria unificada en `fit`); luego H3 (`fit`). Revisión de H1 y stt antes de `main`. D-19 pedida a GVE en Zeldris/galivelop-evaluator#17 |
 | **Check** | `python3 .claude/gw/scripts/md-links.py`, `python3 .claude/gw/scripts/agent-map.py`, `python3 .claude/gw/scripts/ci-local.py --validate`, `python3 .claude/gw/scripts/tests-after-main.py`, `python3 -m unittest discover -s tests -t .`: verde |
 
 ## Para la próxima publicación
 
-0.1: S1, H2 y H5 (hechos)
+Desde la 0.1.0: esquemas y `validate_catalog` (H1) y `stt` con Whisper, los dos en `[Unreleased]` del CHANGELOG
 
 ## Hecho (5 últimas)
 
-1. 2026-11-27 — `stt` para la steam-deck: Whisper large-v3-turbo q5_0 y small q8_0 en `catalog/models/`, licencia `mit` en `licenses.json` (Q-38, Q-39; candidatos en `records/stt-candidatos-2026-11-27.md`).
-2. 2026-11-27 — Tag `v0.1.0` sobre `main` (`b6fe0e8`) y release publicados.
-3. 2026-11-27 — Invariante 12: el test de esqueleto ve `importlib.import_module`, `import_module` y `__import__`;
-   uno sin nombre literal hace fallar el test (pendiente leve de la revisión de bloque H2).
-4. 2026-11-27 — PR #3 fusionado (`b6fe0e8`): versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
-5. 2026-11-27 — PR #2 fusionado: fase 0.1 (S1, H2, H5) en `main`, con retro aprobada (P3 y P4 aplicadas).
+1. 2026-11-28 — H5 probado en la Steam Deck LCD: 4 núcleos, 8 hilos, GPU AMD `163f` integrada sin VRAM, `vulkan` y `cpu`.
+2. 2026-11-28 — Fusionadas aquí `ccr-c9ef964f-38192u` (stt) y `ccr-99b59083-p3cl8m` (H1); preguntas de stt renumeradas a Q-43 a Q-45.
+3. 2026-11-28 — H1, revisión del bloque: esquemas como datos del paquete (`gmod/schemas/`), params de gart en los códigos reutilizados y base de LoRA sin ciclos.
+4. 2026-11-28 — H1: esquemas, `validate_catalog` y tests; `gart/` vendorizado en la raíz con `VENDOR.json`.
+5. 2026-11-27 — `stt` para la steam-deck: Whisper large-v3-turbo q5_0 y small q8_0, licencia `mit` (Q-43, Q-44).
 
 ## Pendiente
 

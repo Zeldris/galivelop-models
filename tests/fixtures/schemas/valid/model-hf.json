@@ -1,0 +1,67 @@
+{
+  "kind": "gmod.model/0",
+  "id": "qwen3-tts-1.7b-voicedesign",
+  "name": "Qwen3-TTS 1.7B VoiceDesign",
+  "tasks": [
+    "tts"
+  ],
+  "provenance": [
+    {
+      "consumer": "gvoice",
+      "path": "gvoice/engines/qwentts.json",
+      "commit": "8a17618",
+      "key": "models[2]"
+    },
+    {
+      "consumer": "gvoice",
+      "path": "gvoice/engines/qwentts.json",
+      "commit": "8a17618",
+      "key": "models[3]"
+    }
+  ],
+  "variants": [
+    {
+      "id": "qwen3-tts-1.7b-voicedesign:gguf-q8_0",
+      "format": "gguf",
+      "quantization": "q8_0",
+      "license": "apache-2.0",
+      "licenseNotes": "apache-2.0 en todos sus repos hf (Serveurperso/Qwen3-TTS-GGUF), comprobado con la API de Hugging Face el 2026-11-27; ver docs/records/diferencias-catalogos-2026-11-27.md 5.4",
+      "bytes": 2333984448,
+      "runtimes": [
+        {
+          "id": "qwentts.cpp",
+          "minVersion": "5916bf7c79dbb4e66fc059cdc507a79a23a28bb4"
+        }
+      ],
+      "source": {
+        "type": "hf"
+      },
+      "files": [
+        {
+          "role": "weights",
+          "name": "qwen-talker-1.7b-voicedesign-Q8_0.gguf",
+          "bytes": 2042833824,
+          "sha256": "575610ab1ddcca4dca6bd9a64bcd859d93bbad8764f9cab24e1dbc0c51f62276",
+          "hf": {
+            "repo": "Serveurperso/Qwen3-TTS-GGUF",
+            "revision": "b7ee2e8c7459c3bea99da23e3d178125a7d1713c",
+            "path": "qwen-talker-1.7b-voicedesign-Q8_0.gguf"
+          },
+          "url": "https://huggingface.co/Serveurperso/Qwen3-TTS-GGUF/resolve/b7ee2e8c7459c3bea99da23e3d178125a7d1713c/qwen-talker-1.7b-voicedesign-Q8_0.gguf"
+        },
+        {
+          "role": "tokenizer",
+          "name": "qwen-tokenizer-12hz-Q8_0.gguf",
+          "bytes": 291150624,
+          "sha256": "1883beeed99348fc35e23dd225e9082f93f6f8c109330a33d935baa8acdbfd94",
+          "hf": {
+            "repo": "Serveurperso/Qwen3-TTS-GGUF",
+            "revision": "b7ee2e8c7459c3bea99da23e3d178125a7d1713c",
+            "path": "qwen-tokenizer-12hz-Q8_0.gguf"
+          },
+          "url": "https://huggingface.co/Serveurperso/Qwen3-TTS-GGUF/resolve/b7ee2e8c7459c3bea99da23e3d178125a7d1713c/qwen-tokenizer-12hz-Q8_0.gguf"
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 # Petición a GVE (galivelop-evaluator), 2026-11-27
 
 **De:** galivelop-models (gmod). **Decisión:** D-19 de [`docs/ddd.md`](../ddd.md).
-**Estado:** escrita aquí; la persona la lleva a GVE (desde aquí no se modifica otro repo).
+**Estado:** abierta como issue en GVE el 2026-11-28 (Zeldris/galivelop-evaluator#17, Q-41: b).
 
 gmod recoge las medidas de GVE y las cita (`gmod.measurement`, hito H6). Para eso, cada informe `gve.*` que mida un
 modelo tiene que decir, además de lo que ya trae (`run.id`, `gve_version`, el esquema):

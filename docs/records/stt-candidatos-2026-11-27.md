@@ -2,7 +2,7 @@
 
 Búsqueda abierta por P-10 y Q-37: ningún consumidor tiene modelo de `stt`, así que la invariante 9 (cada Tarea con
 una variante `fits` o `tight` en la `steam-deck`) no se cumple para `stt`. Aquí se apuntan los candidatos con datos
-leídos de fuentes primarias; la elección es de la persona (Q-38 y Q-39).
+leídos de fuentes primarias; la elección es de la persona (Q-43 y Q-44).
 
 ## Requisitos de la Deck
 

@@ -5,6 +5,11 @@ la regla y las tareas de cada versión, en el [roadmap](docs/roadmap.md).
 
 ## [Unreleased]
 
+### Added
+
+- Esquemas `gmod.model/0`, `gmod.machine/0` y `gmod.licenses/0` en `gmod/schemas/` (datos del paquete), y `gmod.validate_catalog(root)` (valida `catalog/` con `gart`; devuelve `Problem(file, pointer, code, params)`).
+- `stt` en el catálogo: `whisper-large-v3-turbo` (q5_0) y `whisper-small` (q8_0) con `whisper.cpp` v1.9.6, y la licencia `mit` en `catalog/licenses.json`.
+
 ## [0.1.0] - 2026-11-27
 
 ### Added

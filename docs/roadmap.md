@@ -57,7 +57,7 @@ Lo que no depende del validador de `gart`: el esqueleto, los datos del catálogo
 
 | Id | Tarea | Estado |
 |---|---|---|
-| H1 | Esquemas `gmod.model/0` y `gmod.machine/0`, con ejemplos válidos e inválidos; valida el catálogo de H2 | esperando el validador de `gart` |
+| H1 | Esquemas `gmod.model/0` y `gmod.machine/0`, con ejemplos válidos e inválidos; valida el catálogo de H2 | hecho (Q-40: a, `gart` vendorizado a mano en `7d26869`; esquemas en `gmod/schemas/`, `gmod.validate_catalog`) |
 | H3 | `fit` con la tabla de reglas de memoria a mano (D-5, D-21, D-22) | pendiente (tras H1) |
 | H4 | `recommend` con filtro por tarea y por licencia (D-13) | pendiente (tras H3) |
 

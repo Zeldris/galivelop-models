@@ -11,6 +11,8 @@ except ImportError:  # Python 3.10: the package supports it, this one test does 
 
 ROOT = Path(__file__).resolve().parent.parent
 PACKAGE = ROOT / "gmod"
+# `gart` is the read-only vendored copy of the galivelop-artifacts validator (see gart/VENDOR.json), a sibling package.
+VENDORED = ROOT / "gart"
 # Modules that reach the network; `gmod` never imports them (DDD invariant 12).
 NETWORK_MODULES = {"socket", "ssl", "http", "urllib", "ftplib", "smtplib", "imaplib", "poplib", "xmlrpc", "asyncio"}
 # Calls that import a module by name at run time: `importlib.import_module`, `import_module`, `__import__`.
@@ -47,6 +49,28 @@ def imported_roots(path):
     return roots
 
 
+def dynamic_imports(source):
+    """Lines of the calls that import a module at run time, and of the `importlib` imports.
+
+    `gmod` imports only with `import` statements, so it has none; `imported_roots` also reads the literal ones, so
+    the stdlib and network checks would still hold if this ban were relaxed.
+    """
+    lines = []
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.Call):
+            func = node.func
+            name = func.id if isinstance(func, ast.Name) else func.attr if isinstance(func, ast.Attribute) else None
+            if name in {"__import__", "import_module"}:
+                lines.append(node.lineno)
+        elif isinstance(node, (ast.Import, ast.ImportFrom)):
+            names = [alias.name for alias in node.names]
+            if isinstance(node, ast.Import) and any(n.split(".")[0] == "importlib" for n in names):
+                lines.append(node.lineno)
+            elif isinstance(node, ast.ImportFrom) and (node.module or "").split(".")[0] == "importlib":
+                lines.append(node.lineno)
+    return lines
+
+
 class SkeletonTest(unittest.TestCase):
     def test_package_imports(self):
         import gmod
@@ -60,13 +84,25 @@ class SkeletonTest(unittest.TestCase):
         self.assertEqual(project["requires-python"], ">=3.10")
 
     def test_only_stdlib_and_no_network(self):
-        sources = sorted(PACKAGE.rglob("*.py"))
+        sources = sorted(PACKAGE.rglob("*.py")) + sorted(VENDORED.rglob("*.py"))
         self.assertTrue(sources, "gmod has no source files")
+        self.assertTrue(list(VENDORED.glob("*.py")), "gart has no source files")
         for path in sources:
             with self.subTest(path=path.relative_to(ROOT).as_posix()):
-                roots = imported_roots(path) - {"gmod"}
+                roots = imported_roots(path) - {"gmod", "gart"}
                 self.assertEqual(roots - set(sys.stdlib_module_names), set(), "imports outside the stdlib")
                 self.assertEqual(roots & NETWORK_MODULES, set(), "imports a network module")
+                self.assertEqual(dynamic_imports(path.read_text(encoding="utf-8")), [], "imports at run time")
+
+    def test_dynamic_imports_are_caught(self):
+        for source in (
+            'import importlib\nimportlib.import_module("socket")',
+            'from importlib import import_module\nimport_module("socket")',
+            '__import__("socket")',
+        ):
+            with self.subTest(source=source):
+                self.assertTrue(dynamic_imports(source))
+        self.assertEqual(dynamic_imports("import os\nos.getcwd()"), [])
 
     def test_dynamic_imports_are_seen(self):
         cases = {

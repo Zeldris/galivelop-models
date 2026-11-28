@@ -338,6 +338,49 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Answered: 2026-11-27
 
 ## Q-38
+- Refs:
+- Status: answered
+- Asked: 2026-11-27
+- Question: ¿Cómo se sube el tag v0.1.0? (a) lo subes tú a mano; (b) conectas tu equipo por Remote Control a esta sesión; (c) en una sesión local
+- Recommendation: c: abrir una sesión de Claude Code en tu equipo con el repo y pedir el tag; aquí no hay equipo conectado
+- Answer: ya estaba subido (v0.1.0 sobre b6fe0e8)
+- Answered: 2026-11-27
+
+## Q-39
+- Refs:
+- Status: answered
+- Asked: 2026-11-27
+- Question: 0.2 (H1, H3, H4, H7) depende del validador de gart (D-9). ¿Qué hago mientras? (a) esperar; (b) adelantar H3 (memoria unificada de la Deck, sin validador); (c) otra cosa
+- Recommendation: a: esperar al validador de gart; si ya está publicado, dime dónde y empiezo H1
+- Answer: a (la persona delega; el agente elige esperar): gart sigue en DDD (8d7489c, sin tags ni código del validador) y H3 depende de H1 según el DDD, así que (b) no era viable
+- Answered: 2026-11-27
+
+## Q-40
+- Refs: H1
+- Status: answered
+- Asked: 2026-11-28
+- Question: El validador de gart ya está en su main (gart-H1, H2, H9; commit 7d26869), sin tag y sin el kit de vendorizado (gart-H11, aún lejos). Solo stdlib; no admite anyOf/oneOf/allOf ni $ref fuera del archivo. ¿Empezamos H1 vendorizándolo a mano (a) o esperamos a un tag o a gart-H11 (b)?
+- Recommendation: a) Empezar H1 ya: copiar gart/ fijado a 7d26869 en gmod/_vendor/gart con un VENDOR.json escrito a mano y un test que rehace los sha256 con hashlib (invariante 11 de gart); al salir gart-H11, se cambia por su kit. Es la copia vendorizada de su ADR 0002, no un validador provisional, así que D-9 se cumple
+- Answer: a
+- Answered: 2026-11-28
+
+## Q-41
+- Refs: H1
+- Status: answered
+- Asked: 2026-11-28
+- Question: GVE no registra aún variante, máquina ni versión del motor (D-19), y su repo no menciona nuestra petición. ¿Se la haces llegar tú (a) o la abro yo como issue en galivelop-evaluator (b)?
+- Recommendation: a) Pasarle tú la petición docs/records/peticion-gve-2026-11-27.md a GVE (allí no consta en ningún sitio); H6 sigue esperando
+- Answer: b
+- Answered: 2026-11-28
+
+## Q-42
+- Refs: H1
+- Status: open
+- Asked: 2026-11-28
+- Question: La copia de gart se instala como paquete de primer nivel `gart`. Si otro consumidor (grun, gforge) o el propio galivelop-artifacts se instalan en el mismo entorno con su `gart`, uno pisa al otro y el commit fijado deja de regir. ¿Lo dejamos en la raíz y pedimos a gart imports relativos (a), o lo metemos ya en gmod/_vendor/gart editando sus 3 imports, con la nota en VENDOR.json y el sha256 del archivo editado (b)?
+- Recommendation: a) Dejarlo en la raíz y pedir a gart que su __init__.py use imports relativos; con eso, la siguiente copia va a gmod/_vendor/gart sin editarla. Hoy gart no es instalable (no tiene pyproject), así que el choque no puede darse aún
+
+## Q-43
 - Refs: H2
 - Status: answered
 - Asked: 2026-11-27
@@ -346,7 +389,7 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Answer: a
 - Answered: 2026-11-27
 
-## Q-39
+## Q-44
 - Refs: H2
 - Status: answered
 - Asked: 2026-11-27
@@ -355,7 +398,7 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Answer: ok
 - Answered: 2026-11-27
 
-## Q-40
+## Q-45
 - Refs: H3
 - Status: open
 - Asked: 2026-11-27

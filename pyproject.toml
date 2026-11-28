@@ -12,4 +12,7 @@ license = { text = "MIT" }
 dependencies = []
 
 [tool.setuptools.packages.find]
-include = ["gmod*"]
+include = ["gmod*", "gart*"]
+
+[tool.setuptools.package-data]
+gmod = ["schemas/*.json"]

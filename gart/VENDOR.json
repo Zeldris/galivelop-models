@@ -1,0 +1,15 @@
+{
+  "schema": "gart.vendor/0",
+  "note": "Hand-written: no gart tag exists yet and the gart-H11 vendor kit (gart vendor) does not exist; regenerate with the kit when it does. Read-only copy: never edit (gart DDD invariant 11).",
+  "source": {
+    "repo": "galivelop-artifacts",
+    "commit": "7d26869"
+  },
+  "version": "0.0.0+7d26869",
+  "files": {
+    "__init__.py": "6e77fee8d78f020c4849573decff57342a84e21cae1b8644f56b4ed79c89cfa0",
+    "canon.py": "a541c1d86d4443c18307e6f02aa74c50479f05bb483e9661f2d6dff300e308eb",
+    "kind_id.py": "762244ac8a8982b6b23b7bcbc8f3fe3e89b6993f37d33598f30b2928bb143792",
+    "schema.py": "fb69632c0b7d8bcabd77dc55e10d66151d2d6a46d2c79b1b08a717aab949b9d7"
+  }
+}
