@@ -1,0 +1,46 @@
+{
+  "kind": "gmod.machine/0",
+  "id": "steam-deck",
+  "name": "Steam Deck",
+  "cpu": {
+    "model": "AMD Zen 2",
+    "cores": 4,
+    "threads": 8
+  },
+  "ramMiB": 16384,
+  "gpus": [
+    {
+      "name": "AMD RDNA2",
+      "vendor": "AMD",
+      "integrated": true,
+      "vramMiB": null
+    }
+  ],
+  "computeApis": [
+    "vulkan",
+    "cpu",
+    "directml"
+  ],
+  "os": "linux",
+  "provenance": [
+    {
+      "consumer": "gvc",
+      "path": "gdev/machine_levels/steam-deck.json",
+      "commit": "014f7ff",
+      "key": "description"
+    },
+    {
+      "consumer": "gvoice",
+      "path": "gvoice/machine_profiles/steam-deck.json",
+      "commit": "8a17618",
+      "key": "engine"
+    },
+    {
+      "consumer": "gimg",
+      "path": "gimg/machine_profiles/steam-deck.json",
+      "commit": "bc27219",
+      "key": "engine.maxVram"
+    }
+  ],
+  "notes": "CPU (AMD Zen 2, 4 núcleos, 8 hilos): ficha pública de Valve, no leída de un consumidor. SO: Linux (SteamOS). Memoria unificada: sin VRAM dedicada (vramMiB null). RAM nominal 16 GiB (P-7)."
+}

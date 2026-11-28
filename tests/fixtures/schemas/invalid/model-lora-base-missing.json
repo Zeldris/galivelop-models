@@ -1,0 +1,43 @@
+{
+  "kind": "gmod.model/0",
+  "id": "llama3.1-8b-lora",
+  "name": "Llama 3.1 8B Instruct",
+  "tasks": [
+    "text"
+  ],
+  "provenance": [
+    {
+      "consumer": "instalador",
+      "path": "app/catalogo/catalogo.json",
+      "commit": "56f0108",
+      "key": "modelos[\"llama3.1:8b\"]"
+    }
+  ],
+  "variants": [
+    {
+      "id": "llama3.1-8b-lora:gguf-q4_k_m",
+      "format": "gguf",
+      "quantization": "q4_k_m",
+      "license": "llama-3.1-community",
+      "bytes": 4920752841,
+      "runtimes": [
+        {
+          "id": "ollama",
+          "minVersion": "0.34.2"
+        }
+      ],
+      "source": {
+        "type": "ollama",
+        "name": "llama3.1",
+        "tag": "8b",
+        "digest": "sha256:46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e"
+      },
+      "files": [],
+      "layers": {
+        "model": 4920738944,
+        "other": 13897
+      }
+    }
+  ],
+  "base": "no-such-model"
+}

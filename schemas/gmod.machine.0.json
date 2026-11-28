@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gmod.machine/0",
+  "description": "Un perfil de hardware (docs/ddd.md secciones 2 y 5). Memoria en MiB enteros (D-23); vramMiB null = memoria unificada o desconocida.",
+  "type": "object",
+  "required": [
+    "kind",
+    "id",
+    "name",
+    "cpu",
+    "ramMiB",
+    "gpus",
+    "computeApis",
+    "os",
+    "provenance",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "gmod.machine/0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cpu": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "model",
+        "cores",
+        "threads"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cores": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "ramMiB": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "gpus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "vendor",
+          "integrated",
+          "vramMiB"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "vendor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "integrated": {
+            "type": "boolean"
+          },
+          "vramMiB": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "computeApis": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "cuda",
+          "rocm",
+          "vulkan",
+          "metal",
+          "cpu"
+        ]
+      }
+    },
+    "os": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "linux",
+        "windows",
+        "macos",
+        null
+      ]
+    },
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "consumer",
+          "path",
+          "commit",
+          "key"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "consumer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "commit": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{7,40}$"
+          },
+          "key": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

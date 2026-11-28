@@ -1,6 +1,6 @@
 # Catálogo de gmod
 
-Datos del catálogo, migrados en H2 desde los cuatro consumidores. Solo JSON; el código y el validador llegan con H1 (D-9).
+Datos del catálogo, migrados en H2 desde los cuatro consumidores. Solo JSON; lo valida `gmod.validate_catalog("catalog")` (H1) contra los esquemas de `schemas/`.
 
 ## Qué hay
 
@@ -8,9 +8,9 @@ Datos del catálogo, migrados en H2 desde los cuatro consumidores. Solo JSON; el
 - `models/<model-id>.json`: 13 modelos, una variante cada uno (formato, cuantización, origen, archivos, licencia, runtimes).
 - `machines/<id>.json`: 2 máquinas, `steam-deck` y `gpu-12gb`.
 
-## Forma provisional
+## Forma
 
-La forma (claves en inglés, camelCase, bytes enteros, memoria en MiB, listas ordenadas por id) es **provisional hasta H1**, que la fija. Las variantes de Ollama llevan `layers` (su suma es igual a `bytes`; `other` recoge lo que no es modelo, proyector ni borrador) y digest del manifiesto; las de Hugging Face, un origen por archivo, fijado a commit de 40 hex.
+La forma (claves en inglés, camelCase, bytes enteros, memoria en MiB, listas ordenadas por id) la fijan `schemas/gmod.model.0.json`, `schemas/gmod.machine.0.json` y `schemas/gmod.licenses.0.json` (`/0`, provisionales hasta H6). Lo que un esquema sin `if` no puede decir (campos según el origen, base de un LoRA, ids únicos, licencia existente, suma de bytes, `steam-deck` presente) lo comprueba `gmod/catalog.py`; ejemplos en `tests/fixtures/schemas/`. Las variantes de Ollama llevan `layers` (su suma es igual a `bytes`; `other` recoge lo que no es modelo, proyector ni borrador) y digest del manifiesto; las de Hugging Face, un origen por archivo, fijado a commit de 40 hex.
 
 ## De dónde sale cada dato
 
