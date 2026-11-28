@@ -20,12 +20,11 @@
 
 ## Hecho (5 últimas)
 
-0. 2026-11-28 — H1: `gart/` vendorizado en la raíz (sibling de `gmod/`, imports absolutos intactos), `VENDOR.json` y tests.
-1. 2026-11-27 — Tag `v0.1.0` comprobado en el remoto, sobre `b6fe0e8`.
-2. 2026-11-27 — Invariante 12: el test del esqueleto rechaza importaciones dinámicas en `gmod`.
-3. 2026-11-27 — PR #3 fusionado: versión `0.1.0` en `main`.
-4. 2026-11-27 — Commit de versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
-5. 2026-11-27 — PR #2 fusionado: fase 0.1 (S1, H2, H5) en `main`, con retro aprobada (P3 y P4 aplicadas).
+1. 2026-11-28 — H1: `gart/` vendorizado en la raíz (sibling de `gmod/`, imports absolutos intactos), `VENDOR.json` y tests.
+2. 2026-11-27 — Tag `v0.1.0` comprobado en el remoto, sobre `b6fe0e8`.
+3. 2026-11-27 — Invariante 12: el test del esqueleto rechaza importaciones dinámicas en `gmod`.
+4. 2026-11-27 — PR #3 fusionado: versión `0.1.0` en `main`.
+5. 2026-11-27 — Commit de versión `0.1.0` (pyproject, CHANGELOG con H2, roadmap cerrado con `f53a9b2`).
 
 ## Pendiente
 
