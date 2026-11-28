@@ -9,3 +9,9 @@ Lo que queda abierto; la bitácora solo apunta aquí. Se añade y se quita en es
 - steam-deck con vramMiB null: con la invariante 6, fit puede dar unknown en la Deck para imagen y voz; decidir en H3 cómo se trata la memoria unificada (afecta a la invariante 9)
 - H7: pedir `registry.ollama.ai` en los hosts del entorno (el proxy lo rechazó en H2; retro 0.1, P5, aplazada)
 - La persona: desactivar el conector `Claude_Docs` en el entorno (retro 0.1, P2)
+- H1, revisión (leve): `_read` de `gmod/catalog.py` devuelve None ante un error de esquema y da falsos `catalog.missing_machine`/`catalog.unknown_base`; registrar los ids aunque no validen
+- H1, revisión (leve): `layers` y `name`/`tag`/`digest` se aceptan en orígenes hf/url; decidir si `layers` es obligatorio en ollama
+- H1, revisión (leve): `catalog.variant_id` lleva params `{model,id}` o `{expected}` según la rama; una sola forma o dos códigos
+- H1, revisión (leve): los esquemas se leen con `json.loads` (clave duplicada en silencio) y sin caché; usar `gart.canon.loads_strict`
+- H1, revisión (leve): gart da por entero `1.0`, así que `"bytes": 4920752841.0` valida; rechazar float en bytes/MiB/layers o escribir en el DDD que se acepta (invariante 10)
+- H1, revisión (leve): `AGENTS.md` e invariante 12 dicen «nada fuera de la stdlib»; nombrar ahí la copia vendorizada de `gart`

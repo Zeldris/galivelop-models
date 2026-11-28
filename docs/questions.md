@@ -372,3 +372,10 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 - Recommendation: a) Pasarle tú la petición docs/records/peticion-gve-2026-11-27.md a GVE (allí no consta en ningún sitio); H6 sigue esperando
 - Answer: b
 - Answered: 2026-11-28
+
+## Q-42
+- Refs: H1
+- Status: open
+- Asked: 2026-11-28
+- Question: La copia de gart se instala como paquete de primer nivel `gart`. Si otro consumidor (grun, gforge) o el propio galivelop-artifacts se instalan en el mismo entorno con su `gart`, uno pisa al otro y el commit fijado deja de regir. ¿Lo dejamos en la raíz y pedimos a gart imports relativos (a), o lo metemos ya en gmod/_vendor/gart editando sus 3 imports, con la nota en VENDOR.json y el sha256 del archivo editado (b)?
+- Recommendation: a) Dejarlo en la raíz y pedir a gart que su __init__.py use imports relativos; con eso, la siguiente copia va a gmod/_vendor/gart sin editarla. Hoy gart no es instalable (no tiene pyproject), así que el choque no puede darse aún
