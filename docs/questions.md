@@ -375,10 +375,12 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-42
 - Refs: H1
-- Status: open
+- Status: answered
 - Asked: 2026-11-28
 - Question: La copia de gart se instala como paquete de primer nivel `gart`. Si otro consumidor (grun, gforge) o el propio galivelop-artifacts se instalan en el mismo entorno con su `gart`, uno pisa al otro y el commit fijado deja de regir. ¿Lo dejamos en la raíz y pedimos a gart imports relativos (a), o lo metemos ya en gmod/_vendor/gart editando sus 3 imports, con la nota en VENDOR.json y el sha256 del archivo editado (b)?
 - Recommendation: a) Dejarlo en la raíz y pedir a gart que su __init__.py use imports relativos; con eso, la siguiente copia va a gmod/_vendor/gart sin editarla. Hoy gart no es instalable (no tiene pyproject), así que el choque no puede darse aún
+- Answer: a
+- Answered: 2026-11-28
 
 ## Q-43
 - Refs: H2
@@ -400,7 +402,9 @@ file (format: header of scripts/questions.py). Answer by number: `questions.py a
 
 ## Q-45
 - Refs: H3
-- Status: open
+- Status: answered
 - Asked: 2026-11-27
 - Question: ¿Cómo trata `fit` (H3) una GPU integrada con memoria unificada y `vramMiB: null`, como la steam-deck? a) Regla implícita: GPU `integrated: true` + `vramMiB: null` ⇒ la memoria es `ramMiB`; b) campo explícito de memoria compartida en el esquema de `Machine` (H1) y `fit` usa `ramMiB` solo con él; c) la Deck solo encaja por `cpu` contra `ramMiB` y la GPU queda `unknown`
 - Recommendation: b) Campo explícito en el esquema (H1): la GPU declara memoria compartida (p. ej. `sharedMemory: true`); con él, `fit` usa `ramMiB` como bolsa común de CPU y GPU, y `vramMiB: null` sin ese campo sigue dando `unknown` (invariante 6 intacta). La reserva del sistema y del juego la sigue poniendo el consumidor (D-22). Así la invariante 9 se cumple con datos, no con un caso especial de `steam-deck`
+- Answer: b
+- Answered: 2026-11-28
